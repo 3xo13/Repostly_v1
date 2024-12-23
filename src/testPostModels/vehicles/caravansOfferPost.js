@@ -1,0 +1,20 @@
+export const post = {
+	title: "RENAULT 2006",
+	category: "Vehicles",
+	subCategory: "Caravans",
+	postType: "offer",
+	options: {
+		kind: "Alcove motorhome",
+		brand: "Bürstner",
+		modelYear: "2022",
+		spareParts: "2 years",
+		mileage: "150000",
+		circulationDate: "2006",
+		reference: "11/0023",
+		price: "20000",
+		dateFirstEntryCirculation: "2006",
+		discription: "maison caravane déplaçable en bois",
+		address: "Toulouse (31000)",
+	},
+	images: [],
+}

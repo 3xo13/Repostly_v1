@@ -1,0 +1,28 @@
+export const post = {
+	title: "chambre",
+	category: "Vacation Rentals",
+	subCategory: "Seasonal rentals",
+	postType: "offer",
+	options: {
+		natureOfAccommodation: "Bed and Breakfast",
+		typeOfAccommodation: "Bungalow",
+		numberOfStars: "Awaiting classification",
+		capacity: "2 people",
+		numberOfRooms: "1",
+		arrivalTime: "08:00",
+		departureSchedule: "08:00",
+		equipment: "Dishwasher",
+		outside: "Garden",
+		servicesAndaccessibility: "Housekeeping included",
+		smokersAllowd: false,
+		petsAllowed: true,
+		rentalWithSwimmingPool: false,
+		priceType: "At night",
+		description: "une chambre d'hôtel avec petit déjeuner",
+		address: "Route de Lyon, Valencin (38540)",
+		minimumPrice: "450",
+		maximumPrice: "800",
+		reference: "320",
+	},
+	images: ["https://repostlyfr.s3.eu-north-1.amazonaws.com/uploads/3.jpg"]
+};

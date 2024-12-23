@@ -1,0 +1,26 @@
+export const post = {
+	title: "RENAULT clio 2006",
+	category: "Vehicles",
+	subCategory: "Cars",
+	postType: "offer",
+	options: {
+		color: "Independent / Franchise",
+		furniture: "Cuir partiel",
+		equipment: "Régulateur de vitesse",
+		features: "Véhicule non fumeur",
+		condition: "Non endommagé",
+		air: "3",
+		emissionClass: "Euro 2",
+		partAvaliableTime: "Non disponible", 
+		loaLld: false,
+		mileage: "370000",
+		permit: "Without a license",
+		gearBox: "Manual",
+		reference: "11/0023",
+		plateNumber: "AF-156-AN",
+		technicalInspection: "2/2024",
+		discription: "nous avons besoin d'un stagiaire coiffeur pour aider dans notre boutique",
+		address: "Toulouse (31000)",
+	},
+	images: ["1.jpg"]
+}

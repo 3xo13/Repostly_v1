@@ -10,16 +10,20 @@ import { connectToDB } from '@/db/connectToDB.js';
 import { selectors } from '@/automation/utils/variables/selectors.js';
 import { createBrowserPage } from '@/automation/utils/createBrowserAndPage.js';
 import { takeScreenshot } from '@/automation/utils/dev/takeScreenshot.js';
-
-const connectionURL = process.env.BROWSER_CONNECTION_URL;
+import OTP from '@/db/models/OTP.js';
+import ExternalAccount from '@/db/models/ExternalAccount.js';
 
 const menuSelector = selectors.menuBtn;
 
-export const loginWithOTP = async (userId, email, password) => {
+export const loginWithOTP = async (userId, email, password, accountId) => {
     try {
         console.log("creating browser...");
         
         const {browser, page} = await createBrowserPage()
+
+        if (!browser || !page) {
+            throw new Error("enable to create a new page");
+        }
 
         console.log("opening page...");
         await page.goto('https://www.leboncoin.fr/', { waitUntil: "load" });
@@ -42,7 +46,10 @@ export const loginWithOTP = async (userId, email, password) => {
             await takeScreenshot(page, "requestTest", "popupRemoved")
         }
 
-        await navigateToLogin(page)
+        const navigationRes = await navigateToLogin(page)
+        if (!navigationRes) {
+            throw new Error("navigation to login page failed");
+        }
 
         const res = await login(page, email, password)
         if (!res) {
@@ -52,34 +59,41 @@ export const loginWithOTP = async (userId, email, password) => {
         const menuBtn = await page.$(menuSelector)
         if (!menuBtn) {
             console.log('checking otp...');
-            
             const otp = await checkForOTP(userId)
-    
             console.log('writing code...');
             
             await enterOTP(page, otp)
-    
-            console.log('saving cookies');
-            
-            
         }
         await connectToDB()
-        // Get all cookies
+        console.log('saving cookies');
+        // Get and save all cookies from target site
         const cookies = await browser.cookies(); // Save cookies to the database
         for (const cookie of cookies) {
-            const newCookie = new Cookie({ data: cookie, userId });
+            const newCookie = new Cookie({ data: cookie, userId, accountId });
             await newCookie.save();
         }
 
+        // delete the old otp code after using
+        await OTP.deleteOne({userId})
+
+        // update the account state
+        const account = await ExternalAccount.findById(accountId)
+        account.loggedIn = true;
+        await account.save() 
+
         console.log("cookies saved...");
-        
-        //take page screenshot
-        await takeScreenshot(page, "newPost", "automateSuccess")
+                
         // close the browser instance
         await browser.close();
-        // #didomi - notice - learn - more - button
+
+        return true
     } catch (error) {
         console.log("🚀 ~ automate ~ error:", error)
+        await Cookie.deleteMany({accountId, userId})
+        // update the account state
+        const account = await ExternalAccount.findById(accountId)
+        account.loggedIn = false;
+        await account.save()
         return false
     }
 

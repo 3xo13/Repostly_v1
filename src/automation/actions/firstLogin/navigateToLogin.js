@@ -42,10 +42,12 @@ const navigateToLogin = async (page) => {
 		console.log("loging clicked, waiting for navigation...");
 
 		await page.waitForNavigation()
+		return true
 	} catch (error) {
 		console.log("🚀 ~ navigateToLogin ~ error:", error)
 		// await page.screenshot({ path: 'navToLoginScreenshot.png' });
 		await takeScreenshot(page, "requstTest", "navToLoginError")
+		return false
 	}
 }
 

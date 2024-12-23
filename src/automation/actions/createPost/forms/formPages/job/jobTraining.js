@@ -59,8 +59,8 @@ export const jobTraining = async (page, post) => {
         await page.waitForSelector(selectPosition)
 
         // first page (component) requierments
-        const objectiveOptionSelector = objectiveOption(
-            lebonFormOptions.jobTraining.objective.options.indexOf(post.options.workType) +
+        const objectiveOptionSelector = workTypeOption(
+            lebonFormOptions.JobFirstPage.workType.options.indexOf(post.options.workType) +
             1
         )
         const selectorsList = createSelectorsList(post.options)

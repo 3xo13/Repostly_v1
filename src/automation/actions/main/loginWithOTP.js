@@ -65,19 +65,30 @@ export const loginWithOTP = async (userId, email, password, accountId) => {
             await enterOTP(page, otp)
         }
         await connectToDB()
+
+        // delete old cookies
+        await Cookie.deleteMany({accountId})
+
+        // update the account state
+        const account = await ExternalAccount.findById(accountId)
+        if (account.cookies.length) {
+            account.cookies = [];
+        }
+
         console.log('saving cookies');
+
         // Get and save all cookies from target site
         const cookies = await browser.cookies(); // Save cookies to the database
         for (const cookie of cookies) {
             const newCookie = new Cookie({ data: cookie, userId, accountId });
             await newCookie.save();
+            account.cookies = [...account.cookies, newCookie._id]
         }
 
         // delete the old otp code after using
         await OTP.deleteOne({userId})
 
-        // update the account state
-        const account = await ExternalAccount.findById(accountId)
+        
         account.loggedIn = true;
         await account.save() 
 

@@ -3,6 +3,7 @@ export const post = {
 	category: "Home & Garden",
 	subCategory: "Decoration",
 	postType: "offer",
+	images: [],
 	options: {
 		category: "Lighting",
 		kind: "Candle holder & tealight holder",
@@ -18,5 +19,4 @@ export const post = {
 		quantity: "1",
 		packageWeight: "Up to 100g"
 	},
-	images: []
 };

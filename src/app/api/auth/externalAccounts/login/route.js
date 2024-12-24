@@ -1,4 +1,5 @@
 import { loginWithOTP } from "@/automation/actions/main/loginWithOTP";
+import { connectToDB } from "@/db/connectToDB";
 import ExternalAccount from "@/db/models/ExternalAccount";
 import { NextResponse } from "next/server";
 
@@ -9,6 +10,9 @@ export async function POST(req) {
 			throw new Error("missing data!!");
 		}
 
+		// connect database
+		await connectToDB();
+		
 		const account = await ExternalAccount.findById(accountId)
 		if (!account) {
 			throw new Error("account not found!!");

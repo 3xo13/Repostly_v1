@@ -2,16 +2,13 @@ import {connectToDB} from "@/db/connectToDB";
 import User from "@/db/models/user";
 import {NextResponse} from "next/server";
 import {auth} from '@clerk/nextjs/server';
+import getAuthId from "@/utils/helpers/routs/getAuthId";
 
 export async function GET(req) {
     try {
-        let {authId} = await auth();
-        // for testing only
-        if (process.env.NODE_ENV == 'development') 
-            authId = 1;
-        
+        const authId = await getAuthId()
         if (!authId) {
-            throw new Error("user is not signed in");
+            throw new Error("user not authenticated");
         }
         // make sure the database is connected
         await connectToDB()

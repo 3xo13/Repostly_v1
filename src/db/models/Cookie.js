@@ -3,7 +3,11 @@ import mongoose from "mongoose";
 // Define your schema
 const cookieSchema = new mongoose.Schema({
 	data: { type: mongoose.Schema.Types.Mixed, required: true },
-	userId: String
+	userId: String,
+	accountId: {
+		type: String,
+		required: true,
+	}
 });
 
 // Check if model exists before defining it

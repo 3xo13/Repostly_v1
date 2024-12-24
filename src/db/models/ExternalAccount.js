@@ -34,6 +34,11 @@ const externalAccountSchema = new mongoose.Schema({
 	},
 	cookies: [String],
 	posts: [String],
+	loggedIn: {
+		type: Boolean,
+		required: true,
+		default: false
+	}
 });
 
 // Check if model exists before defining it

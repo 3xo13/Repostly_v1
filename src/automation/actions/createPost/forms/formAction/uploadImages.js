@@ -3,7 +3,7 @@ import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import mime from "mime-types";
 import s3Client from "@/db/storage/s3Client";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
-import extractS3KeysFromUrls from "@/db/storage/tempFiles/extractS3keysFromUrls";
+import extractS3KeysFromUrls from "@/automation/utils/helpers/extractS3keysFromUrls";
 
 const Bucket = process.env.S3_BUCKET;
 

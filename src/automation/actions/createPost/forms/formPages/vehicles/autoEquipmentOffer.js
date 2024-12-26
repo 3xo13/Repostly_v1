@@ -5,7 +5,6 @@ import { writeToInput } from "../writeToInput";
 import { pressContinue } from "../../formAction/pressContinue";
 import { waitForMilliseconds } from "@/automation/utils/waitForMilliseconds";
 import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
-import fetchAndSaveS3Object from "@/db/storage/tempFiles/extractS3keysFromUrls";
 import { uploadImages } from "../../formAction/uploadImages";
 import { autoEquipmentOffer } from "@/automation/utils/variables/formSelectors/vehicles/autoEquipmentOfferSelectors";
 

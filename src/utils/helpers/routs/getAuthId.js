@@ -7,9 +7,9 @@ export default async function getAuthId() {
     let {authId} = await auth();
     
     // for testing only
-    if (process.env.NODE_ENV == 'development') {
-        authId = "1";
-    }
+    // if (process.env.NODE_ENV == 'development') {
+    //     authId = "1";
+    // }
 
     if (!authId) {
         throw new Error("user is not signed in");

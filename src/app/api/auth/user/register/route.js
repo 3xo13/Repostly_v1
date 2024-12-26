@@ -9,7 +9,7 @@ export async function POST(req) {
 		const {username: name} = await req.json()
 		let { authId } = await auth();
 		// for testing only
-		if(process.env.NODE_ENV == 'development') authId = `${Date.now()}`;
+		// if(process.env.NODE_ENV == 'development') authId = `${Date.now()}`;
 
 		if (!authId) {
 			throw new Error("user is not signed in");

@@ -7,11 +7,9 @@ import { connectToDB } from "@/db/connectToDB";
 export async function POST(req) {
 	try {
 		const {username: name} = await req.json()
-		let { authId , sessionId } = await auth();
-		// for testing only
-		// if(process.env.NODE_ENV == 'development') authId = `${Date.now()}`;
-		
-		
+		let { userId: authId , sessionId } = await auth();
+		console.log("🚀 ~ POST ~ sessionId:", sessionId)
+		console.log("🚀 ~ POST ~ authId:", authId)
 		
 		if (!authId) {
 			throw new Error("user is not signed in");

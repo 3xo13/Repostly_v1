@@ -4,7 +4,7 @@ import {auth} from '@clerk/nextjs/server';
 // or a server component
 export default async function getAuthId() {
 	try {
-    let {authId} = await auth();
+    let {userId: authId} = await auth();
     
     // for testing only
     // if (process.env.NODE_ENV == 'development') {

@@ -7,7 +7,7 @@ import Image from 'next/image'
 const BrandMessagePanel = () => {
   return (
     <div className=' Brand-message h-screen w-full flex flex-col	 justify-center	 items-center'>
-   <h2>
+   <h2 className='w-full'>
    Lets get you started with Repostly
    </h2>
    <div className='section-messgae bg-white w-80 h-60 rounded-2xl	'>

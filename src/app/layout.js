@@ -1,5 +1,7 @@
 import "./globals.css";
 import ContextProvider from "@/context/ContextProviedr";
+import  { Toaster } from 'react-hot-toast';
+import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 // import { ClerkProvider } from "@clerk/nextjs";
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -19,16 +21,23 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
- 
+ <ClerkProvider>
     <html lang="en">
       <body
       >
+           {/* <header>
+                <SignedOut>
+                  <SignInButton />
+                </SignedOut>
+               
+              </header> */}
         <ContextProvider>
         {children}
+        <Toaster />
         </ContextProvider>
        
       </body>
     </html>
-  
+    </ClerkProvider>
   );
 }

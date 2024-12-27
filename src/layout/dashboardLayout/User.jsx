@@ -6,6 +6,7 @@ import { CiUser } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,9 @@ const Dropdown = () => {
                     className="px-4 py-2 text-white focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center"
                     onClick={toggleDropdown}
                 >
-                  <Image src={user} alt="user-image" />
+              <SignedIn>
+                  <UserButton />
+                </SignedIn>
                       
                 </button>
 

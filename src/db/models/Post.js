@@ -42,8 +42,12 @@ const postSchema = new mongoose.Schema({
         options: {
             type: Object
         }
-    }
-
+    },
+    failCount: {
+        type: Number,
+        default: 0,
+    },
+    failLog: [String],
 });
 
 // Check if model exists before defining it

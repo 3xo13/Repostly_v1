@@ -2,13 +2,7 @@ import mongoose from 'mongoose';
 
 // Define your batch schema
 const scheduleBatchSchema = new mongoose.Schema({
-    operations: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Operation',
-            required: true
-        }
-    ],
+    posts: [String],
     publishDate: {
         type: Date,
         required: true
@@ -30,7 +24,6 @@ const scheduleBatchSchema = new mongoose.Schema({
     },
     endDate: {
         type: Date,
-        required: true,
     },
 });
 

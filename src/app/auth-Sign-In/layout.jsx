@@ -2,7 +2,7 @@ import BrandMessagePanel from "@/components/ui/authui/BrandMessage";
 export default function RootLayout({ children }) {
   return (
     <div className='lg:flex  bg-main flex-row  vh-100'>
-         <div style={{width:"45%" , height:"100%"}} className=' w-full lg:w-auto bg-main h-full '>
+         <div style={{ height:"100%"}} className=' w-full  lg:w-[45%]  lg:w-auto bg-main h-full '>
         <BrandMessagePanel />
         </div>
          {/* righth section here  */}

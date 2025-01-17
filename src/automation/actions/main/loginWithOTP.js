@@ -33,13 +33,18 @@ export const loginWithOTP = async (userId, email, password, accountId) => {
 
         // check and cancel donation popup
         const popUp = await page.$("#gimii-consent-raiser")
-        if (popUp) {
+        const popUp2 = await page.$("button._root_1dq4a_1:nth-child(1)")
+        if (popUp || popUp2) {
             console.log("popup found");
             
             await page.evaluate(() => {
                 const element = document.querySelector('#gimii-consent-raiser'); // Replace 'selector' with the actual selector of the node you want to delete
+                const element2 = document.querySelector('button._root_1dq4a_1:nth-child(1)');
                 if (element) {
                     element.remove();
+                }
+                if (element2) {
+                    element2.remove();
                 }
             });
 

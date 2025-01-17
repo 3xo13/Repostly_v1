@@ -7,6 +7,7 @@ import getAuthId from "@/utils/helpers/routs/getAuthId";
 export async function GET(req) {
     try {
         const authId = await getAuthId()
+        console.log("🚀 ~ GET ~ authId:", authId)
         if (!authId) {
             throw new Error("user not authenticated");
         }

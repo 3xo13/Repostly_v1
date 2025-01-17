@@ -1,12 +1,20 @@
 import { connectToDB } from "@/db/connectToDB";
 import ExternalAccount from "@/db/models/ExternalAccount";
 import User from "@/db/models/user";
+import { getUserId } from "@/utils/helpers/routs/getUserId";
 import isValidEmail from "@/utils/userInputSanitization/isValidEmail";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-	const { email, password, userId } = await req.json();
+	// const { email, password } = await req.json();
+	const data = await req.formData();
+	const email = data.get("email");
+	console.log("🚀 ~ POST ~ email:", email)
+	const password = data.get("password");
+	console.log("🚀 ~ POST ~ password:", password)
 	try {
+		const userId = await getUserId()
+		console.log("🚀 ~ POST ~ userId:", userId)
 		if (!email || !password || !userId) {
 			throw new Error("missing data!!");
 		}

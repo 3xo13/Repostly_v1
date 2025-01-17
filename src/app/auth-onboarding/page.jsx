@@ -94,8 +94,9 @@ const page = () => {
        
 
         <Signupgoogel />
+
    {/* CAPTCHA Widget */}
-   <div id="clerk-captcha"></div>
+        <div id="clerk-captcha"></div>
       </form>
     </div>
   );

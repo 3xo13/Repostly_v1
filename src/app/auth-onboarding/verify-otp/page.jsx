@@ -1,7 +1,7 @@
 "use client"
 import React, {Suspense, useEffect, useRef, useState} from 'react'
 import Button from '@/components/common/Button'
-import LeboncLogo from "../../../../../public/images/lebonc-logo.png"
+import LeboncLogo from "../../../../public/images/lebonc-logo.png"
 import Image from 'next/image'
 import {useRouter, useSearchParams} from 'next/navigation'
 import axios from 'axios'

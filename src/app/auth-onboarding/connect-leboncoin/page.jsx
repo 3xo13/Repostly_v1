@@ -15,16 +15,10 @@ const page = () => {
         e.preventDefault();
         try {
             const formData = new FormData(e.currentTarget);
-            console.log("🚀 ~ handelSubmit ~ formData:", formData)
 
           const { data } = await axios.post("/api/auth/externalAccounts/put", formData)
           if (data.success) {
-            console.log(data);
-            fetch("/api/auth/externalAccounts/login", {
-              method: "POST",
-              body: JSON.stringify({ accountId: data.accountId })
-            })
-            router.push("/auth-onboarding/verify-otp")
+            router.push(`/auth-onboarding/verify-otp/${data.accountId}`)
             return setComplatedSteps("")
           }
 

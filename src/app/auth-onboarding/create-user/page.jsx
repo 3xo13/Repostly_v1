@@ -8,7 +8,7 @@ const CreateGoogleUser = () => {
 	const router = useRouter()
 	const [errMsg, setErrMsg] = useState("");
 
-	// create a new user in the database
+	// create a new user in the database after sign-up with google
 	useEffect(()=>{
 		;(async()=>{
 			try {

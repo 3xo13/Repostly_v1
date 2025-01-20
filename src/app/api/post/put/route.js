@@ -1,7 +1,7 @@
 import { connectToDB } from "@/db/connectToDB";
 import ExternalAccount from "@/db/models/ExternalAccount";
 import Post from "@/db/models/Post";
-import User from "@/db/models/User";
+import User from "@/db/models/user";
 import getAuthId from "@/utils/helpers/routs/getAuthId";
 import isValidEmail from "@/utils/userInputSanitization/isValidEmail";
 import { NextResponse } from "next/server";

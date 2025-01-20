@@ -22,7 +22,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 
-}/**************************** Creat-acout-style*************************************/
+}/**************************** Creat-acount-style*************************************/
 .create-acount-section{
 padding-top: 1rem;
 display: flex;
@@ -148,7 +148,7 @@ background: white;
 width: 66px;
 height: 66px;
 }
-/****************************End connect-leboncion-style*************************************/
+/*********************End connect-leboncion-style***************/
 .user-inerset{
 width: 100%;
 height: 100%;
@@ -199,7 +199,7 @@ font-weight: bold;
 }
 .select-plan{
 width: 100%;
-height:  100vh;
+height:  100dvh;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -273,4 +273,20 @@ color: white;
 background-color: white;
 color: #131525;
 border: 1px solid #F1F1F7;
+}
+
+
+
+/* tailwind custome classes */
+
+.row {
+  @apply flex flex-row
+}
+
+.col {
+  @apply flex flex-col
+}
+
+.center {
+  @apply justify-center items-center
 }

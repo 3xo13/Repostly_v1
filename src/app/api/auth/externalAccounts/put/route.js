@@ -1,6 +1,6 @@
 import { connectToDB } from "@/db/connectToDB";
 import ExternalAccount from "@/db/models/ExternalAccount";
-import User from "@/db/models/user";
+import User from "@/db/models/User";
 import { getUserId } from "@/utils/helpers/routs/getUserId";
 import isValidEmail from "@/utils/userInputSanitization/isValidEmail";
 import { NextResponse } from "next/server";
@@ -31,8 +31,8 @@ export async function POST(req) {
 		const user = await User.findById(userId)
 		user.accounts = [...user.accounts, newExternalAccount._id]
 		await user.save()
-		
-		return NextResponse.json({success: true, accountId: newExternalAccount._id} );
+
+		return NextResponse.json({ success: true, accountId: newExternalAccount._id });
 	} catch (error) {
 		console.log("🚀 ~ POST ~ error:", error)
 		return NextResponse.json({ success: false, message: error.message });

@@ -16,11 +16,11 @@ export default function StepsIndicator({ steps }) {
   const activeIndex = steps.findIndex((step) => step.path === pathname);
 
   return (
-    <div className="grid lg:grid-cols-5 gap-1 mt-4 mb-4  justify-center items-center md:grid grid-cols-3">
+    <div className="grid lg:grid-cols-5 gap-1 h-[10dvh] place-items-center w-full justify-center items-center md:grid grid-cols-3">
       {steps.map((step, index) => (
         <div
           key={step.label}
-          className={`w-28	 h-3 rounded-[10] 
+          className={`w-10/12 h-3 rounded-[10] 
             ${
               step.label <= complatedSteps.includes(step.label)
                 ? "bg-main text-white"

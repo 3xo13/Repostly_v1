@@ -1,13 +1,13 @@
-import {connectToDB} from "@/db/connectToDB";
+import { connectToDB } from "@/db/connectToDB";
 import { Cookie } from "@/db/models/Cookie";
 import ExternalAccount from "@/db/models/ExternalAccount";
-import User from "@/db/models/user";
+import User from "@/db/models/User";
 import getAuthId from "@/utils/helpers/routs/getAuthId";
 import isValidEmail from "@/utils/userInputSanitization/isValidEmail";
-import {NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
-    const {email, password, accountId} = await req.json();
+    const { email, password, accountId } = await req.json();
     try {
 
         if (!email || !password || !accountId) {
@@ -40,11 +40,11 @@ export async function POST(req) {
         account.cookies = [];
         await account.save()
 
-				await Cookie.deleteMany({accountId: account._id})
+        await Cookie.deleteMany({ accountId: account._id })
 
-        return NextResponse.json({success: true, account});
+        return NextResponse.json({ success: true, account });
     } catch (error) {
         console.log("🚀 ~ POST ~ error:", error)
-        return NextResponse.json({success: false, message: error.message});
+        return NextResponse.json({ success: false, message: error.message });
     }
 }

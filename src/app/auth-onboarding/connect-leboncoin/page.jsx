@@ -2,7 +2,7 @@
 import React from 'react'
 import Input from '@/components/common/Input'
 import Button from '@/components/common/Button'
-import image3 from "../../../../public/images/lebonc-logo.png"
+// import image3 from "/images/lebonc-logo.png"
 import Image from 'next/image'
 import {MdOutlineMail} from "react-icons/md";
 import {RiLockPasswordLine} from "react-icons/ri";
@@ -38,7 +38,7 @@ const page = () => {
                 <div className="repostly"></div>
                 <p></p>
                 <div className="leboncoin">
-                    <Image src={image3} alt="Leboncion"/>
+                    <Image src={"/images/lebonc-logo.png"} width={100} height={100} alt="Leboncion"/>
                 </div>
             </div>
             <form className="input-wrapper" onSubmit={handelSubmit}>

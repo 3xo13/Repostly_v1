@@ -1,7 +1,7 @@
 import { connectToDB } from "@/db/connectToDB";
 import ExternalAccount from "@/db/models/ExternalAccount";
 import Post from "@/db/models/Post";
-import User from "@/db/models/user";
+import User from "@/db/models/User";
 import getAuthId from "@/utils/helpers/routs/getAuthId";
 import isValidEmail from "@/utils/userInputSanitization/isValidEmail";
 import { NextResponse } from "next/server";
@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
 	try {
 		const { accountId, post, active, postId } = await req.json();
-		
+
 		if (!accountId || !post) {
 			throw new Error("missing data!!");
 		}
@@ -37,8 +37,8 @@ export async function POST(req) {
 		}
 
 		await postDoc.save()
-		
-		return NextResponse.json({success: true, post: postDoc} );
+
+		return NextResponse.json({ success: true, post: postDoc });
 	} catch (error) {
 		console.log("🚀 ~ POST ~ error:", error)
 		return NextResponse.json({ success: false, message: error.message });

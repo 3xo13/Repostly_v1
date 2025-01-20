@@ -1,38 +1,45 @@
 "use client"
-import React, {Suspense, useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Button from '@/components/common/Button'
-import LeboncLogo from "../../../../../public/images/lebonc-logo.png"
 import Image from 'next/image'
 import {useRouter, useSearchParams} from 'next/navigation'
 import axios from 'axios'
 import CountDown from '@/components/ui/countDown/CountDown'
-import SpinnerWithMessage from '@/components/common/SpinnerWithMessage '
 
 const page = () => {
     const params = useSearchParams()
     const id = params.get("id");
-    console.log("🚀 ~ page ~ id:", id)
-    // const {id} = params; console.log("🚀 ~ page ~ id:", id)
+
     const router = useRouter();
     const inputRefs = useRef([]);
 
     const [otp, setOtp] = useState(Array(6).fill(""))
     const [errMsg, setErrMsg] = useState("");
+    const [isScriptRunning, setIsScriptRunning] = useState(false);
 
-    useEffect(() => {;
+    useEffect(() => {
+        if (isScriptRunning) {
+            return;
+        }
         (async () => {
+            setIsScriptRunning(true)
             try {
                 const {data} = await axios.post(
                     "/api/auth/externalAccounts/login",
                     {accountId: id}
                 )
                 if (data.success) {
-                    router.push("/auth-onboarding/user-Interests")
+                    router.push("/auth-onboarding/select-plan")
+                } else {
+                    setErrMsg("Connection attempt failed, retrying...")
+                    router.refresh()
                 }
             } catch (error) {
                 console.log("🚀 ~ ; ~ error:", error)
+                setErrMsg(error.message)
             }
-        })()
+            setIsScriptRunning(false)
+        })();
     }, [])
 
     // handle change of each of the input values (otp over multiple input elements)
@@ -80,58 +87,73 @@ const page = () => {
     }
 
     return (
-        
-            <div className="create-acount-section h-screen">
-                <div className="content">
-                    <span>Repostly</span>
-                    <p>
-                        Please input the gotten sent to your mail address KadaO@123.design
-                    </p>
+
+        <div className="create-acount-section h-screen">
+            <div className="content">
+                <span>Repostly</span>
+                <p>
+                    Please input the one-time-passcode (OTP) sent to your mail address by leboncoin
+                </p>
+            </div>
+            <div className="how-connect">
+                <div className="repostly">
+                    <Image
+                        src={"/images/repostly-logo.svg"}
+                        alt="Leboncion"
+                        width={100}
+                        height={100}/>
                 </div>
-                <div className="how-connect">
-                    <div className="repostly"></div>
-                    <p></p>
-                    <div className="leboncoin">
-                        <Image src={LeboncLogo} alt="Leboncion"/>
-                    </div>
+                <p></p>
+                <div className="leboncoin">
+                    <Image
+                        src={"/images/lebonc-logo.png"}
+                        alt="Leboncion"
+                        width={100}
+                        height={100}/>
                 </div>
-                <form className="input-wrapper" onSubmit={handelSubmit}>
-                    <div
-                        className="flex flex-row items-center justify-between w-full max-w-[80%] mb-5 mt-10 gap-2 ">
-                        {
-                            otp.map((val, index) => (
-                                <div key={index} className="w-16 h-16">
-                                    <input className="w-full h-full flex flex-col
+            </div>
+            <form className="input-wrapper" onSubmit={handelSubmit}>
+                <div
+                    className="flex flex-row items-center justify-between w-full max-w-[80%] mb-5 mt-10 gap-2 ">
+                    {
+                        otp.map((val, index) => (
+                            <div key={index} className="w-16 h-16">
+                                <input className="w-full h-full flex flex-col
                                         items-center justify-center text-center px-5
                                         outline-none rounded-xl border
                                         border-gray-200 text-2xl bg-white
                                         focus:border-[#131525]
                                         text-[#131525] focus:ring-2 focus:ring-[#131525]" type="text" ref={(el) => (inputRefs.current[index] = el)} onKeyDown={(e) => handleKeyDown(e, index)}
-                                        // maxLength={1}
-                                        name="otp" value={val} onChange={(e) => handleChange(e, index)}/>
-                                </div>
-                            ))
-                        }
-                    </div>
+                                    // maxLength={1}
+                                    name="otp" value={val} onChange={(e) => handleChange(e, index)}/>
+                            </div>
+                        ))
+                    }
+                </div>
 
-                    <CountDown seconds={180}/>
+                {/*  countdown of the login script, it takes a bit over a minute to send the otp 
+ * to the user and the script is designed to wait for the otp for around 3 minut
+ *  es so 4 minutes in total
 
-                    <div
-                        style={{
-                            marginTop: "2rem"
-                        }}></div>
-                    <Button type="submit" title="Verify"/>
-                </form>
-                {errMsg && <p className='text-red-500 text-xl'>{errMsg}</p>}
-                <p className="mt-8 text-[#475467]">
-                    Didn’t get a code?
-                    <button
-                        className="p-0 m-0 bg-transparent border-none outline-none  focus:ring-2 focus:ring-offset-2 focus:ring-[#131525] text-[#131525] underline"
-                        type="button">Click to resend.</button>
-                </p>
-                <div></div>
-            </div>
-        
+ */
+                }
+                <CountDown seconds={240}/>
+
+                <div style={{
+                        marginTop: "2rem"
+                    }}></div>
+                <Button type="submit" title="Verify"/>
+            </form>
+            {errMsg && <p className='text-red-500 text-xl'>{errMsg}</p>}
+            <p className="mt-8 text-[#475467]">
+                Didn’t get a code?
+                <button
+                    className="p-0 m-0 bg-transparent border-none outline-none  focus:ring-2 focus:ring-offset-2 focus:ring-[#131525] text-[#131525] underline"
+                    type="button">Click to resend.</button>
+            </p>
+            <div></div>
+        </div>
+
     )
 }
 

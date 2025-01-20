@@ -1,13 +1,13 @@
-import {connectToDB} from "@/db/connectToDB";
-import User from "@/db/models/user";
-import {NextResponse} from "next/server";
-import {auth} from '@clerk/nextjs/server';
+import { connectToDB } from "@/db/connectToDB";
+import User from "@/db/models/User";
+import { NextResponse } from "next/server";
+import { auth } from '@clerk/nextjs/server';
 import isValidUsername from "@/utils/userInputSanitization/isValedUsername";
 import getAuthId from "@/utils/helpers/routs/getAuthId";
 
 export async function POST(req) {
     try {
-        const {phone, username, userId} = await req.json();
+        const { phone, username, userId } = await req.json();
         if (!phone || !username || !userId) {
             throw new Error("missing data!!");
         }
@@ -33,9 +33,9 @@ export async function POST(req) {
         user.username = username;
         await user.save();
 
-        return NextResponse.json({success: true, user});
+        return NextResponse.json({ success: true, user });
     } catch (error) {
         console.log("🚀 ~ POST ~ error:", error)
-        return NextResponse.json({success: false, message: error.message});
+        return NextResponse.json({ success: false, message: error.message });
     }
 }

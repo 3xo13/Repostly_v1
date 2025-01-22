@@ -7,28 +7,29 @@ import {CgMenuRight} from "react-icons/cg";
 import {CgMenuLeft} from "react-icons/cg";
 import {usePathname, useRouter} from "next/navigation"; // Use 'next/navigation' here
 
+const navLinks = [
+    {
+        name: "My Dashboard",
+        href: "/dashboard"
+    }, {
+        name: "My Products",
+        href: "/dashboard/products"
+    }, {
+        name: "My calendar",
+        href: "/dashboard/calendar"
+    }, {
+        name: "My Account",
+        href: "/dashboard/profile"
+    }
+];
+
 const Navbar = ({showSidebar, toggleShowSodebar}) => {
     const pathname = usePathname();
     const router = useRouter();
-    const navLinks = [
-        {
-            name: "My Dashboard",
-            href: "/dashboard"
-        }, {
-            name: "My Products",
-            href: "/dashboard/products"
-        }, {
-            name: "My calendar",
-            href: "/dashboard/calendar"
-        }, {
-            name: "My Account",
-            href: "/dashboard/profile"
-        }
-    ];
 
     return (
         <div
-            className="dark:bg-gray-800 m-4 rounded-lg mb-0 bg-white py-5  text-gray-300 h-14  fixed top-0 w-full p-4 mr-20 z-20 px-10	">
+            className="dark:bg-gray-800 rounded-lg mb-0 py-5 text-gray-300 h-14 top-0 w-full p-4 px-10">
             <nav className="flex items-center justify-between px-4">
                 <div className="flex items-center gap-10 transition-all duration-200 w-full">
                     {

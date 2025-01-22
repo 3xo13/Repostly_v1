@@ -7,6 +7,9 @@ import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
 import { decorationOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/decorationOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
+
+const { "Home & Garden": { "Decoration": decorationOptions } } = lebonFormOptions;
+
 const {
   adDescription,
   adTitle,
@@ -34,21 +37,21 @@ const selectorsList = (options) => [
     input: selectCategory,
     option: () =>
       categoryOption(
-        lebonFormOptions.decorationOffer.category.options.indexOf(options.category) + 1
+        decorationOptions.category.options.indexOf(options.category) + 1
       ),
   },
   {
     input: selectKind,
     option: () =>
       kindOption(
-        lebonFormOptions.decorationOffer.kind.options[options.category].indexOf(options.kind) + 1
+        decorationOptions.kind.options[options.category].indexOf(options.kind) + 1
       ),
     },
     {
       input: selectState,
       option: () =>
         stateOption(
-          lebonFormOptions.decorationOffer.state.options.indexOf(options.state) +
+          decorationOptions.state.options.indexOf(options.state) +
           1
         ),
       },
@@ -56,7 +59,7 @@ const selectorsList = (options) => [
         input: selectMaterial,
         option: () =>
           materialOption(
-            lebonFormOptions.decorationOffer.material.options.indexOf(
+            decorationOptions.material.options.indexOf(
               options.material
             ) + 1
           ),
@@ -65,7 +68,7 @@ const selectorsList = (options) => [
           input: selectColor,
           option: () =>
             colorOption(
-              lebonFormOptions.decorationOffer.color.options.indexOf(options.color) +
+              decorationOptions.color.options.indexOf(options.color) +
               1
             ),
           },
@@ -73,7 +76,7 @@ const selectorsList = (options) => [
     input: selectWeight,
     option: () =>
       weightOption(
-        lebonFormOptions.decorationOffer.packageWeight.options.indexOf(options.packageWeight) +
+        decorationOptions.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
   },

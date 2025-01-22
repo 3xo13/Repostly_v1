@@ -9,6 +9,7 @@ import { householdLinenOffer } from "@/automation/utils/variables/formSelectors/
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
 import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
 import { addNewItemType } from "../../formAction/addNewItemType";
+const { "Home & Garden": { "Household linen": householdLinenOptions } } = lebonFormOptions;
 const {
   adDescription,
   adTitle,
@@ -40,7 +41,7 @@ const selectorsList = (options) => [
     input: selectKind,
     option: () =>
       kindOption(
-        lebonFormOptions.householdLinenOffer.kind.options.indexOf(
+        householdLinenOptions.kind.options.indexOf(
           options.kind
         ) + 1
       ),
@@ -49,7 +50,7 @@ const selectorsList = (options) => [
     input: selectProduct,
     option: () =>
       productOption(
-        lebonFormOptions.householdLinenOffer.product.options[options.kind].indexOf(
+        householdLinenOptions.product.options[options.kind].indexOf(
           options.product
         ) + 1
       ),
@@ -58,7 +59,7 @@ const selectorsList = (options) => [
     input: selectColor,
     option: () =>
       colorOption(
-        lebonFormOptions.householdLinenOffer.color.options.indexOf(
+        householdLinenOptions.color.options.indexOf(
           options.color
         ) + 1
       ),
@@ -67,7 +68,7 @@ const selectorsList = (options) => [
     input: selectMaterial,
     option: () =>
       materialOption(
-        lebonFormOptions.householdLinenOffer.material.options.indexOf(
+        householdLinenOptions.material.options.indexOf(
           options.material
         ) + 1
       ),
@@ -76,7 +77,7 @@ const selectorsList = (options) => [
     input: selectState,
     option: () =>
       stateOption(
-        lebonFormOptions.householdLinenOffer.state.options.indexOf(
+        householdLinenOptions.state.options.indexOf(
           options.state
         ) + 1
       ),
@@ -85,7 +86,7 @@ const selectorsList = (options) => [
     input: selectWeight,
     option: () =>
       weightOption(
-        lebonFormOptions.householdLinenOffer.packageWeight.options.indexOf(options.packageWeight) +
+        householdLinenOptions.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
   },

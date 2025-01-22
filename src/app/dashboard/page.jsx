@@ -7,20 +7,23 @@ import Modulepopup from '@/components/common/Modulepopup'
 import dynamic from 'next/dynamic';
 
 // Dynamically import the MapSection component
-const MapSection = dynamic(() => import('@/components/ui/dashboardui/MapSection'), { ssr: false });
+const MapSection = dynamic(
+    () => import ('@/components/ui/dashboardui/MapSection'),
+    {ssr: false}
+);
 const page = () => {
-  
-  return (
-    <div className='h-full '>
-     <Cards />
-   
-        <div className="flex flex-col gap-3 mt-10 lg:gap-3 lg:flex-row min-h-scree">
-           <ProductsGrid />
-            <MapSection />
+
+    return (
+        <div className='h-full '>
+            <Cards/>
+
+            <div className="flex flex-col gap-3 mt-10 lg:gap-3 lg:flex-row min-h-scree">
+                <ProductsGrid/>
+                <MapSection/>
+            </div>
+            <Modulepopup/>
         </div>
-        <Modulepopup />
-        </div>
-  )
+    )
 }
 
 export default page

@@ -4,7 +4,7 @@ export const post = {
 	subCategory: "Furnishings",
 	postType: "offer",
 	options: {
-		piece: "Kitchen & Dining Room",
+		room: "Kitchen & Dining Room",
 		kind: "Convenient",
 		material: "Other",
 		color: "Silver",

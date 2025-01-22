@@ -5,9 +5,9 @@ import {useSignUp} from '@clerk/nextjs';
 import toast from 'react-hot-toast';
 import SpinnerWithMessage from './SpinnerWithMessage ';
 
-const Signupgoogel = () => {
+const Signupgoogel = ({loading, setLoading}) => {
     const {signUp} = useSignUp()
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
     
     const handleGoogleSignUp = async () => {
         setLoading(true)
@@ -23,9 +23,9 @@ const Signupgoogel = () => {
         }
     };
 
-    if (loading) {
-        return <SpinnerWithMessage title={"Creating Your Acounnt..."}/>
-    }
+    // if (loading) {
+    //     return <div className="create-acount-section "><SpinnerWithMessage title={"Creating Your Acounnt..."} /></div>
+    // }
 
     return (
         <div>

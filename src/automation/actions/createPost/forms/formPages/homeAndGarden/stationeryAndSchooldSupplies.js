@@ -5,11 +5,13 @@ import { writeToInput } from "../writeToInput";
 import { pressContinue } from "../../formAction/pressContinue";
 import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
-import { householdLinenOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/householdLinenOfferSelectors";
 import { stationeryAndSchooldSuppliesOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/stationeryAndSchooldSuppliesOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
 import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
 import { addNewItemType } from "../../formAction/addNewItemType";
+
+const { "Home & Garden": { "Stationery & School Supplies": schooldSuppliesOptions } } = lebonFormOptions;
+
 const {
   adDescription,
   adTitle,
@@ -35,7 +37,7 @@ const selectorsList = (options) => [
     input: selectState,
     option: () =>
       stateOption(
-        lebonFormOptions.stationeryAndSchooldSuppliesOffer.state.options.indexOf(
+        schooldSuppliesOptions.state.options.indexOf(
           options.state
         ) + 1
       ),
@@ -44,7 +46,7 @@ const selectorsList = (options) => [
     input: selectDurationOfAvailabilityOfSpareParts,
     option: () =>
       durationOfAvailabilityOfSparePartsOption(
-        lebonFormOptions.stationeryAndSchooldSuppliesOffer.durationOfAvailabilityOfSpareParts.options.indexOf(
+        schooldSuppliesOptions.durationOfAvailabilityOfSpareParts.options.indexOf(
           options.spareParts
         ) + 1
       ),
@@ -53,7 +55,7 @@ const selectorsList = (options) => [
     input: selectWeight,
     option: () =>
       weightOption(
-        lebonFormOptions.stationeryAndSchooldSuppliesOffer.packageWeight.options.indexOf(options.packageWeight) +
+        schooldSuppliesOptions.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
   },

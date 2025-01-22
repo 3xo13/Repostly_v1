@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Step1 = () => {
+const TitlePriceDescriptionReference = ({product, dispatch, updateOption}) => {
     return (
         <div className="w-full min-h-[30%]">
             <h1 className="mb-3 mt-3 p-3 text-2xl font-medium text-head">Create a new post</h1>
@@ -18,7 +18,9 @@ const Step1 = () => {
                         id="name"
                         name="name"
                         placeholder="Title name..."
-                        className=" text-main p-3 w-full lg:w-[80%] outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"/>
+                        className=" text-main p-3 w-full lg:w-[80%] outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"
+                        value={product.title}
+                        onChange={e => dispatch({title: e.target.value})} />
                 </div>
 
                 {/* Description Field */}
@@ -33,7 +35,8 @@ const Step1 = () => {
                         id="description"
                         name="description"
                         placeholder="Input description here*"
-                        className="text-main p-3 min-h-[230px] w-full lg:w-[80%] outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"></textarea>
+                        className="text-main p-3 min-h-[230px] w-full lg:w-[80%] outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"
+                        onChange={e => updateOption("description", e.target.value )}/>
                 </div>
                 <div
                     className="mb-6 flex flex-col lg:flex-row items-start lg:items-center gap-5">
@@ -49,7 +52,8 @@ const Step1 = () => {
                             id="price"
                             name="price"
                             placeholder="Input new price"
-                            className="text-main p-3 pr-10 w-full outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"/>
+                            className="text-main p-3 pr-10 w-full outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"
+                            onChange={e => updateOption("price", e.target.value)} />
                         <span
                             className="absolute right-[1px] rounded-md rounded-t-none	 top-1/2 transform -translate-y-1/2 text-gray-400 w-[50px] h-full bg-gray-200 flex items-center justify-center">
                             $
@@ -60,7 +64,7 @@ const Step1 = () => {
                 <div
                     className="mb-6 flex flex-col lg:flex-row items-start lg:items-center gap-5">
                     <label
-                        htmlFor="price"
+                        htmlFor="newPrice"
                         className="w-full lg:w-[15%] text-lg font-medium text-gray-700">
                         New price
                     </label>
@@ -68,10 +72,11 @@ const Step1 = () => {
                     <div className="relative w-full lg:w-[80%]">
                         <input
                             type="text"
-                            id="price"
-                            name="price"
+                            id="newPrice"
+                            name="newPrice"
                             placeholder="Input new price"
-                            className="text-main p-3 pr-10 w-full outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"/>
+                            className="text-main p-3 pr-10 w-full outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"
+                            onChange={e => updateOption("newPrice", e.target.value)} />
                         <span
                             className="absolute right-[1px] rounded-md rounded-t-none	 top-1/2 transform -translate-y-1/2 text-gray-400 w-[50px] h-full bg-gray-200 flex items-center justify-center">
                             $
@@ -90,11 +95,12 @@ const Step1 = () => {
                         id="name"
                         name="name"
                         placeholder="Title name..."
-                        className=" text-main p-3 w-full lg:w-[80%] outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"/>
+                        className=" text-main p-3 w-full lg:w-[80%] outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"
+                        onChange={e => updateOption("reference", e.target.value)} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default Step1;
+export default TitlePriceDescriptionReference;

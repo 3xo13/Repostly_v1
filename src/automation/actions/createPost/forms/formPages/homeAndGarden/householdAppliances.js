@@ -9,6 +9,7 @@ import {householdAppliancesOffer} from "@/automation/utils/variables/formSelecto
 import {skipPrefillMessage} from "../../formAction/skipPrefillMessage";
 import {addNewItemType} from "../../formAction/addNewItemType";
 import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
+const { "Home & Garden": { "Household appliances": householdAppliancesOptions } } = lebonFormOptions;
 const {
     adDescription,
     adTitle,
@@ -39,37 +40,37 @@ const selectorsList = (options) => [
     {
         input: selectKind,
         option: () => kindOption(
-            lebonFormOptions.householdAppliancesOffer.kind.options.indexOf(options.kind) +
+            householdAppliancesOptions.kind.options.indexOf(options.kind) +
             1
         )
   }, {
     input: selectBrand,
     option: () => brandOption(
-      lebonFormOptions.householdAppliancesOffer.brand.options.indexOf(options.brand) +
+      householdAppliancesOptions.brand.options.indexOf(options.brand) +
       1
     )
   }, {
         input: selectProduct,
         option: () => productOption(
-            lebonFormOptions.householdAppliancesOffer.product.options[options.kind].indexOf(options.product) +
+            householdAppliancesOptions.product.options[options.kind].indexOf(options.product) +
             1
         )
     }, {
         input: selectState,
         option: () => stateOption(
-            lebonFormOptions.householdAppliancesOffer.state.options.indexOf(options.state) +
+            householdAppliancesOptions.state.options.indexOf(options.state) +
             1
         )
     }, {
         input: selectDurationOfAvailabilityOfSpareParts,
         option: () => durationOfAvailabilityOfSparePartsOption(
-            lebonFormOptions.householdAppliancesOffer.durationOfAvailabilityOfSpareParts.options.indexOf(options.spareParts) +
+            householdAppliancesOptions.durationOfAvailabilityOfSpareParts.options.indexOf(options.spareParts) +
             1
         )
     }, {
         input: selectWeight,
         option: () => weightOption(
-            lebonFormOptions.householdAppliancesOffer.packageWeight.options.indexOf(options.packageWeight) +
+            householdAppliancesOptions.packageWeight.options.indexOf(options.packageWeight) +
             1
         )
     }

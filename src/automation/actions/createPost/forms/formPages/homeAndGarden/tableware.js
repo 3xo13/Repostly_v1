@@ -9,6 +9,9 @@ import { tablewareOffer } from "@/automation/utils/variables/formSelectors/homeA
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
 import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
 import { addNewItemType } from "../../formAction/addNewItemType";
+
+const { "Home & Garden": { "Tableware": tablewareOptions } } = lebonFormOptions;
+
 const {
   adDescription,
   adTitle,
@@ -40,7 +43,7 @@ const selectorsList = (options) => [
     input: selectCategory,
     option: () =>
       categoryOption(
-        lebonFormOptions.tablewareOffer.category.options.indexOf(
+        tablewareOptions.category.options.indexOf(
           options.category
         ) + 1
       ),
@@ -49,7 +52,7 @@ const selectorsList = (options) => [
     input: selectProduct,
     option: () =>
       productOption(
-        lebonFormOptions.tablewareOffer.product.options[options.category].indexOf(
+        tablewareOptions.product.options[options.category].indexOf(
           options.product
         ) + 1
       ),
@@ -58,7 +61,7 @@ const selectorsList = (options) => [
     input: selectColor,
     option: () =>
       colorOption(
-        lebonFormOptions.tablewareOffer.color.options.indexOf(
+        tablewareOptions.color.options.indexOf(
           options.color
         ) + 1
       ),
@@ -67,7 +70,7 @@ const selectorsList = (options) => [
     input: selectState,
     option: () =>
       stateOption(
-        lebonFormOptions.tablewareOffer.state.options.indexOf(
+        tablewareOptions.state.options.indexOf(
           options.state
         ) + 1
       ),
@@ -76,7 +79,7 @@ const selectorsList = (options) => [
     input: selectMaterial,
     option: () =>
       materialOption(
-        lebonFormOptions.tablewareOffer.material.options.indexOf(
+        tablewareOptions.material.options.indexOf(
           options.material
         ) + 1
       ),
@@ -85,7 +88,7 @@ const selectorsList = (options) => [
         input: selectWeight,
         option: () =>
           weightOption(
-        lebonFormOptions.tablewareOffer.packageWeight.options.indexOf(options.packageWeight) +
+        tablewareOptions.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
   },
@@ -132,8 +135,6 @@ export const tableware = async (page, post) => {
     );
     // reference
     await writeToInput(page, post.options.reference, reference);
-
-    
 
     // write selling price
     await writeToInput(page, post.options.sellingPrice, yourSellingPrice);

@@ -29,7 +29,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-
+height: 90dvh;
 }
 .create-acount-section .content {
 margin: 0 auto ;
@@ -289,4 +289,12 @@ border: 1px solid #F1F1F7;
 
 .center {
   @apply justify-center items-center
+}
+
+.red {
+  @apply bg-red-500
+}
+
+.screen {
+  @apply w-screen h-screen max-w-screen-2xl max-h-screen
 }

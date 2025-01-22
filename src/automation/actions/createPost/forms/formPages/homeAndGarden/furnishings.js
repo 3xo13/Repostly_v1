@@ -5,9 +5,11 @@ import { writeToInput } from "../writeToInput";
 import { pressContinue } from "../../formAction/pressContinue";
 import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
-import { diyOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/diyOfferSelectors";
 import { furnishingsOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/furnishingsOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
+
+const { "Home & Garden": { Furnishings } } = lebonFormOptions;
+
 const {
   adDescription,
   adTitle,
@@ -16,14 +18,14 @@ const {
   kindOption,
   materialOption,
   newPrice,
-  pieceOption,
+  roomOption,
   quantity,
   reference,
   selectColor,
   selectDurationOfAvailabilityOfSpareParts,
   selectKind,
   selectMaterial,
-  selectPiece,
+  selectRoom,
   selectState,
   stateOption,
   yourGeneralConditionsOfSale,
@@ -37,22 +39,22 @@ const selectorsList = (options) => [
     input: selectKind,
     option: () =>
       kindOption(
-        lebonFormOptions.furnishingsOffer.kind.options.indexOf(options.kind) + 1
+        Furnishings.kind.options.indexOf(options.kind) + 1
       ),
   },
   {
-    input: selectPiece,
+    input: selectRoom,
     option: () =>
-      pieceOption(
-        lebonFormOptions.furnishingsOffer.piece.options.indexOf(options.piece) +
-          1
+      roomOption(
+        Furnishings.room.options.indexOf(options.room) +
+        1
       ),
   },
   {
     input: selectDurationOfAvailabilityOfSpareParts,
     option: () =>
       durationOfAvailabilityOfSparePartsOption(
-        lebonFormOptions.furnishingsOffer.durationOfAvailabilityOfSpareParts.options.indexOf(
+        Furnishings.durationOfAvailabilityOfSpareParts.options.indexOf(
           options.spareParts
         ) + 1
       ),
@@ -61,31 +63,31 @@ const selectorsList = (options) => [
     input: selectState,
     option: () =>
       stateOption(
-        lebonFormOptions.furnishingsOffer.state.options.indexOf(options.state) +
-          1
+        Furnishings.state.options.indexOf(options.state) +
+        1
       ),
   },
   {
     input: selectColor,
     option: () =>
       colorOption(
-        lebonFormOptions.furnishingsOffer.color.options.indexOf(options.color) +
-          1
+        Furnishings.color.options.indexOf(options.color) +
+        1
       ),
   },
   {
     input: selectMaterial,
     option: () =>
       materialOption(
-        lebonFormOptions.furnishingsOffer.material.options.indexOf(options.material) +
-          1
+        Furnishings.material.options.indexOf(options.material) +
+        1
       ),
   },
   {
     input: selectWeight,
     option: () =>
       weightOption(
-        lebonFormOptions.furnishingsOffer.packageWeight.options.indexOf(options.packageWeight) +
+        Furnishings.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
   },

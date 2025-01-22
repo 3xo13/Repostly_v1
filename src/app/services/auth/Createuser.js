@@ -28,8 +28,10 @@ const Createuser = async (setLoading , setVerifying , signUp , email , password 
         // direct to verify code commponent
         setVerifying(true);
       } catch (error) {
+        console.log("🚀 ~ Createuser ~ error:", error)
         // Check for specific Clerk error codes
         if (error.errors) {
+          console.log("🚀 ~ Createuser ~ error.errors:", error.errors)
           const clerkError = error.errors[0]?.message || "Something went wrong.";
           toast.error(clerkError);
         } else {

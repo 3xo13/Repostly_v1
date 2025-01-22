@@ -6,8 +6,10 @@ import {useState} from "react";
 import axios from "axios";
 import SpinnerWithMessage from "@/components/common/SpinnerWithMessage ";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const EmailverfySignup = ({username}) => {
+    const router = useRouter()
     const {signUp, isLoaded, setActive} = useSignUp()
     const [code, setCode] = useState('')
     const [loading, setLoading] = useState(false)
@@ -21,10 +23,12 @@ const EmailverfySignup = ({username}) => {
         try {
             // Use the code the user provided to attempt verification
             const signUpAttempt = await signUp.attemptEmailAddressVerification({code});
+            console.log("🚀 ~ handleVerify ~ signUpAttempt:", signUpAttempt)
 
             if (signUpAttempt.status === "complete") {
                 await setActive({session: signUpAttempt.createdSessionId});
                 const response = await axios.post("/api/auth/user/register", {username});
+                console.log("🚀 ~ handleVerify ~ response:", response)
                 if (response.data.success) {
                     toast.success("Account created successfully!");
 
@@ -37,6 +41,7 @@ const EmailverfySignup = ({username}) => {
                 toast.error("make sure you are set the correct code");
             }
         } catch (error) {
+            console.log("🚀 ~ handleVerify ~ error:", error)
             // Check for specific Clerk error codes
             if (error.errors) {
                 const clerkError = error.errors[0]
@@ -50,7 +55,7 @@ const EmailverfySignup = ({username}) => {
         }
     };
     if (loading) {
-        return <SpinnerWithMessage title={"verifying your email..."}/>
+        return <div className="create-acount-section "><SpinnerWithMessage title={"verifying your email..."} /></div>
     }
     return (
         <div className="create-acount-section h-screen w-full">

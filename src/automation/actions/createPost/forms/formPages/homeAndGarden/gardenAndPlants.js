@@ -8,6 +8,7 @@ import { uploadImages } from "../../formAction/uploadImages";
 import { gardenAndPlantsOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/gardenAndPlantsOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
 import { addNewItemType } from "../../formAction/addNewItemType";
+const { "Home & Garden": { "Garden & Plants": gardenAndPlantsOptions } } = lebonFormOptions;
 const {
   adDescription,
   adTitle,
@@ -37,7 +38,7 @@ const selectorsList = (options) => [
     input: selectKind,
     option: () =>
       kindOption(
-        lebonFormOptions.gardenAndPlantsOffer.kind.options.indexOf(
+        gardenAndPlantsOptions.kind.options.indexOf(
           options.kind
         ) + 1
       ),
@@ -46,7 +47,7 @@ const selectorsList = (options) => [
     input: selectProduct,
     option: () =>
       productOption(
-        lebonFormOptions.gardenAndPlantsOffer.product.options[options.kind].indexOf(
+        gardenAndPlantsOptions.product.options[options.kind].indexOf(
           options.product
         ) + 1
       ),
@@ -55,7 +56,7 @@ const selectorsList = (options) => [
     input: selectDurationOfAvailabilityOfSpareParts,
     option: () =>
       durationOfAvailabilityOfSparePartsOption(
-        lebonFormOptions.gardenAndPlantsOffer.durationOfAvailabilityOfSpareParts.options.indexOf(
+        gardenAndPlantsOptions.durationOfAvailabilityOfSpareParts.options.indexOf(
           options.spareParts
         ) + 1
       ),
@@ -64,7 +65,7 @@ const selectorsList = (options) => [
     input: selectState,
     option: () =>
       stateOption(
-        lebonFormOptions.gardenAndPlantsOffer.state.options.indexOf(
+        gardenAndPlantsOptions.state.options.indexOf(
           options.state
         ) + 1
       ),
@@ -73,7 +74,7 @@ const selectorsList = (options) => [
     input: selectWeight,
     option: () =>
       weightOption(
-        lebonFormOptions.gardenAndPlantsOffer.packageWeight.options.indexOf(options.packageWeight) +
+        gardenAndPlantsOptions.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
   },

@@ -7,6 +7,7 @@ import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
 import { diyOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/diyOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
+const { "Home & Garden": { DIY } } = lebonFormOptions;
 const {
   adDescription,
   adTitle,
@@ -32,21 +33,21 @@ const selectorsList = (options) => [
     input: selectKind,
     option: () =>
       kindOption(
-        lebonFormOptions.diyOffer.kind.options.indexOf(options.kind) + 1
+        DIY.kind.options.indexOf(options.kind) + 1
       ),
   },
   {
     input: selectProduct,
     option: () =>
       productOption(
-        lebonFormOptions.diyOffer.product.options[options.kind].indexOf(options.product) + 1
+        DIY.product.options[options.kind].indexOf(options.product) + 1
       ),
   },
   {
     input: selectDurationOfAvailabilityOfSpareParts,
     option: () =>
       durationOfAvailabilityOfSparePartsOption(
-        lebonFormOptions.diyOffer.durationOfAvailabilityOfSpareParts.options.indexOf(
+        DIY.durationOfAvailabilityOfSpareParts.options.indexOf(
           options.spareParts
         ) + 1
       ),
@@ -55,14 +56,14 @@ const selectorsList = (options) => [
     input: selectState,
     option: () =>
       stateOption(
-        lebonFormOptions.diyOffer.state.options.indexOf(options.state) + 1
+        DIY.state.options.indexOf(options.state) + 1
       ),
   },
   {
     input: selectWeight,
     option: () =>
       weightOption(
-        lebonFormOptions.diyOffer.packageWeight.options.indexOf(options.packageWeight) +
+        DIY.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
   },

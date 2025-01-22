@@ -31,7 +31,7 @@ const page = () => {
         <div className="create-acount-section h-screen">
             <div className="content">
                 <span>Repostly</span>
-                <p>Connect your Leboncoin account to start using Repostly</p>
+                <p>Connect your Leboncoin account to Repostly</p>
             </div>
 
             <div className="how-connect">

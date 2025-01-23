@@ -1,4 +1,5 @@
 "use client"
+import Category from "@/components/common/forms/Category";
 import TitlePriceDescriptionReference from "@/components/common/forms/TitleAndPrice";
 import ProductDetails from "@/components/common/forms/ProductDetails";
 import ProductImages from "@/components/common/forms/ProductImages";
@@ -113,24 +114,25 @@ const MuiltsepForms = () => {
     }
 
     const steps = [
-        <TitlePriceDescriptionReference key={0} product={product} dispatch={dispatch} updateOption={updateOption}/>,
-        <ProductDetails key={1} product={product} updateOption={updateOption}/>,
-        <ProductImages key={2} product={product} dispatch={dispatch}/>,
-        <PostingLocation key={3} product={product} updateOption={updateOption} />
+        <Category key={0} product={product} dispatch={dispatch} />,
+        <TitlePriceDescriptionReference key={1} product={product} dispatch={dispatch} updateOption={updateOption}/>,
+        <ProductDetails key={2} product={product} updateOption={updateOption}/>,
+        <ProductImages key={3} product={product} dispatch={dispatch}/>,
+        <PostingLocation key={4} product={product} updateOption={updateOption} />
     ];
     
     const handleContinue = (e) => {
         e.preventDefault()
-        if (currentStep < 3) {
+        if (currentStep < 4) {
             setCurrentStep(currentStep + 1)
         }
-        if (currentStep == 3) {
+        if (currentStep == 4) {
             handleSubmit()
         }
     }
 
     return (
-        <form
+        <div
             className="h-screen w-full md:w-[70%] bg-white flex flex-col justify-between">
             {/* Form Section */}
             <div className="flex-grow overflow-y-auto">
@@ -162,7 +164,7 @@ const MuiltsepForms = () => {
                 }
             </div>
 
-        </form>
+        </div>
     );
 };
 

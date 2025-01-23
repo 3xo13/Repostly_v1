@@ -15,7 +15,8 @@ export const post = {
 		newPrice: "",
 		reference: "852",
 		quantity: "1",
-		packageWeight: "Up to 100g"
+		packageWeight: "Up to 100g",
+		newProductType: "Clearance",
 	},
 	images: []
 };

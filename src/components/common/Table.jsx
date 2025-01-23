@@ -1,87 +1,101 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react'
 import Image from "next/image"
 import image from "../../../public/images/product.png"
 import Lievpost from "../../../public/images/liev-post.png"
 import {CiPlay1} from "react-icons/ci";
 import {HiMiniNoSymbol} from "react-icons/hi2";
+import axios from 'axios';
 
-const products = [
-    {
-        id: 1,
-        productImage: image, // Replace with actual image path
-        description: "Product description, Lorem ipsum dolor sit amet",
-        titel: "Household speakers",
-        category: [
-            "Clothing", "Accessories"
-        ],
-        status: "Active posting",
-        reposts: 12,
-        actions: {
-            edit: true,
-            delete: true
-        }
-    }, {
-        id: 2,
-        productImage: image, // Replace with actual image path
-        description: "Product description, Lorem ipsum dolor sit amet",
-        titel: "Household speakers",
-        category: [
-            "Clothing", "Accessories"
-        ],
-        status: "Active posting",
-        reposts: 12,
-        actions: {
-            edit: true,
-            delete: true
-        }
-    }, {
-        id: 3,
-        productImage: image, // Replace with actual image path
-        description: "Product description, Lorem ipsum dolor sit amet",
-        titel: "Household speakers",
-        category: [
-            "Clothing", "Accessories"
-        ],
-        status: "Active posting",
-        reposts: 12,
-        actions: {
-            edit: true,
-            delete: true
-        }
-    }, {
-        id: 4,
-        productImage: image, // Replace with actual image path
-        description: "Product description, Lorem ipsum dolor sit amet",
-        titel: "Household speakers",
-        category: [
-            "Clothing", "Accessories"
-        ],
-        status: "Active posting",
-        reposts: 12,
-        actions: {
-            edit: true,
-            delete: true
-        }
-    }, {
-        id: 5,
-        productImage: image, // Replace with actual image path
-        description: "Product description, Lorem ipsum dolor sit amet",
-        titel: "Household speakers",
-        category: [
-            "Clothing", "Accessories"
-        ],
-        status: "Active posting",
-        reposts: 12,
-        actions: {
-            edit: true,
-            delete: true
-        }
-    },
-    // Add more items as needed
-];
+// const products = [
+//     {
+//         id: 1,
+//         productImage: image, // Replace with actual image path
+//         description: "Product description, Lorem ipsum dolor sit amet",
+//         titel: "Household speakers",
+//         category: [
+//             "Clothing", "Accessories"
+//         ],
+//         status: "Active posting",
+//         reposts: 12,
+//         actions: {
+//             edit: true,
+//             delete: true
+//         }
+//     }, {
+//         id: 2,
+//         productImage: image, // Replace with actual image path
+//         description: "Product description, Lorem ipsum dolor sit amet",
+//         titel: "Household speakers",
+//         category: [
+//             "Clothing", "Accessories"
+//         ],
+//         status: "Active posting",
+//         reposts: 12,
+//         actions: {
+//             edit: true,
+//             delete: true
+//         }
+//     }, {
+//         id: 3,
+//         productImage: image, // Replace with actual image path
+//         description: "Product description, Lorem ipsum dolor sit amet",
+//         titel: "Household speakers",
+//         category: [
+//             "Clothing", "Accessories"
+//         ],
+//         status: "Active posting",
+//         reposts: 12,
+//         actions: {
+//             edit: true,
+//             delete: true
+//         }
+//     }, {
+//         id: 4,
+//         productImage: image, // Replace with actual image path
+//         description: "Product description, Lorem ipsum dolor sit amet",
+//         titel: "Household speakers",
+//         category: [
+//             "Clothing", "Accessories"
+//         ],
+//         status: "Active posting",
+//         reposts: 12,
+//         actions: {
+//             edit: true,
+//             delete: true
+//         }
+//     }, {
+//         id: 5,
+//         productImage: image, // Replace with actual image path
+//         description: "Product description, Lorem ipsum dolor sit amet",
+//         titel: "Household speakers",
+//         category: [
+//             "Clothing", "Accessories"
+//         ],
+//         status: "Active posting",
+//         reposts: 12,
+//         actions: {
+//             edit: true,
+//             delete: true
+//         }
+//     },
+//     // Add more items as needed
+// ];
 
 const Table = ({product, rows}) => {
-
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        (async () => {
+            try {
+                const { data } = await axios.post("/api/post/getAll")
+                if (data.success) {
+                    setProducts(data.posts)
+                }
+            } catch (error) {
+                console.log("🚀 ~ error:", error)
+            }
+        })()
+    }, [])
     return (
         <div className="w-full flex justify-between items-center mb-3 mt-1 pl-3">
             <div
@@ -129,11 +143,11 @@ const Table = ({product, rows}) => {
                                 return (
                                     <tr
                                         className="hover:bg-slate-50 border-b border-slate-200 h-full"
-                                        key={item.id}>
+                                        key={item._id}>
                                         <td className="p-4 py-5">
                                             <Image
                                                 className='w-[92px] h-[92px] rounded-[6px]'
-                                                src={item.productImage}
+                                                src={item.data.images[0] || "/images/repostly-logo.svg"} width={100} height={100}
                                                 alt="productName"/>
                                         </td>
                                         <td className="p-4 py-5">
@@ -144,18 +158,18 @@ const Table = ({product, rows}) => {
                                                     live post
                                                 </span>
                                                 <h2 className="text-head mt-3 ">
-                                                    {item.titel}
+                                                    {item.data.titel}
                                                 </h2>
                                                 <p className="mt-2">
 
-                                                    {item.description}
+                                                    {item.data.options.description}
                                                 </p>
                                             </div>
                                         </td>
                                         <td className="p-4 py-5">
                                             <div className="text-sm text-slate-500">
                                                 <div className="grid grid-cols-2">
-                                                    {
+                                                    {/* {
                                                         item
                                                             .category
                                                             .map((item) => {
@@ -166,18 +180,18 @@ const Table = ({product, rows}) => {
                                                                     {item}
                                                                 </span>
                                                             })
-                                                    }
+                                                    } */}
 
                                                 </div>
 
                                             </div>
                                         </td>
                                         <td className="p-4 py-5">
-                                            <div
+                                            {/* <div
                                                 className=' flex gap-1 w-[132px] text-sm h-[29px] border-[#F0F0F0] border rounded-[60px] text-[#191919] items-center justify-center p-1'>
                                                 <span className='w-[8px] h-[8px] rounded-[50px] bg-[#16A34A]'></span>
                                                 {item.status}
-                                            </div>
+                                            </div> */}
                                         </td>
                                         <td className="p-4 py-5">
                                             <div

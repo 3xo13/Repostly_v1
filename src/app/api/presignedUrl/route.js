@@ -7,9 +7,9 @@ export async function POST(req) {
 	try {
 		const { uploadUrl, filePath } = await createPresignedUrl(key)
 		console.log("🚀 ~ POST ~ { uploadUrl, filePath }:", { uploadUrl, filePath })
-		return NextResponse.json({ uploadUrl, filePath })
+		return NextResponse.json({ success: true, uploadUrl, filePath })
 	} catch (error) {
 		console.log("🚀 ~ POST ~ error:", error)
-		return NextResponse.json({ error })
+		return NextResponse.json({ success: false, message: error.message })
 	}
 }

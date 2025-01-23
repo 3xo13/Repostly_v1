@@ -1,83 +1,98 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from "next/image"
 import image from "../../../../public/images/Rectangle 141812.png"
 import { FaPlay } from "react-icons/fa";
 import Lievpost from "../../../../public/images/liev-post.png"
 import { useDahboardContext } from '@/context/DashboardProviedr';
+import axios from 'axios';
 
+// const products = [
+//   {
+//     id:1,
+//     productImage: image, // Replace with actual image path
+//     description: "Product description, Lorem ipsum dolor",
+//    titel:"Household speakers",
+//     category: ["Clothing", "Accessories"],
+//     status: "Active posting",
+//     reposts: 12,
+//     actions: { edit: true, delete: true }
+//   },
+//   {
+//     id:2,
+//     productImage: image, // Replace with actual image path
+//     description: "Product description, Lorem ipsum dolor",
+//    titel:"Household speakers",
+//     category: ["Clothing", "Accessories"],
+//     status: "Active posting",
+//     reposts: 12,
+//     actions: { edit: true, delete: true }
+//   },
+//   {
+//     id:3,
+//     productImage: image, // Replace with actual image path
+//     description: "Product description, Lorem ipsum dolor",
+//    titel:"Household speakers",
+//     category: ["Clothing", "Accessories"],
+//     status: "Active posting",
+//     reposts: 12,
+//     actions: { edit: true, delete: true }
+//   },
+//   {
+//     id:4,
+//     productImage: image, // Replace with actual image path
+//     description: "Product description, Lorem ipsum dolor",
+//    titel:"Household speakers",
+//     category: ["Clothing", "Accessories"],
+//     status: "Active posting",
+//     reposts: 12,
+//     actions: { edit: true, delete: true }
+//     },
+//     {
+//       id:5,
+//       productImage: image, // Replace with actual image path
+//       description: "Product description, Lorem ipsum dolor",
+//       titel:"Household speakers",
+//       category: ["Clothing", "Accessories"],
+//       status: "Active posting",
+//       reposts: 12,
+//       actions: { edit: true, delete: true }
+//     },
+//     {
+//       id:6,
+//       productImage: image, // Replace with actual image path
+//       description: "Product description, Lorem ipsum dolor",
+//       titel:"Household speakers",
+//       category: ["Clothing", "Accessories"],
+//       status: "Active posting",
+//       reposts: 12,
+//       actions: { edit: true, delete: true }
+//     },
+//   // Add more items as needed
+// ];
 const ProductsGrid = () => {
   const {handelModulemode} = useDahboardContext()
-  const products = [
-    {
-      id:1,
-      productImage: image, // Replace with actual image path
-      description: "Product description, Lorem ipsum dolor",
-     titel:"Household speakers",
-      category: ["Clothing", "Accessories"],
-      status: "Active posting",
-      reposts: 12,
-      actions: { edit: true, delete: true }
-    },
-    {
-      id:2,
-      productImage: image, // Replace with actual image path
-      description: "Product description, Lorem ipsum dolor",
-     titel:"Household speakers",
-      category: ["Clothing", "Accessories"],
-      status: "Active posting",
-      reposts: 12,
-      actions: { edit: true, delete: true }
-    },
-    {
-      id:3,
-      productImage: image, // Replace with actual image path
-      description: "Product description, Lorem ipsum dolor",
-     titel:"Household speakers",
-      category: ["Clothing", "Accessories"],
-      status: "Active posting",
-      reposts: 12,
-      actions: { edit: true, delete: true }
-    },
-    {
-      id:4,
-      productImage: image, // Replace with actual image path
-      description: "Product description, Lorem ipsum dolor",
-     titel:"Household speakers",
-      category: ["Clothing", "Accessories"],
-      status: "Active posting",
-      reposts: 12,
-      actions: { edit: true, delete: true }
-      },
-      {
-        id:5,
-        productImage: image, // Replace with actual image path
-        description: "Product description, Lorem ipsum dolor",
-        titel:"Household speakers",
-        category: ["Clothing", "Accessories"],
-        status: "Active posting",
-        reposts: 12,
-        actions: { edit: true, delete: true }
-      },
-      {
-        id:6,
-        productImage: image, // Replace with actual image path
-        description: "Product description, Lorem ipsum dolor",
-        titel:"Household speakers",
-        category: ["Clothing", "Accessories"],
-        status: "Active posting",
-        reposts: 12,
-        actions: { edit: true, delete: true }
-      },
-    // Add more items as needed
-  ];
+  const [products, setProducts] = useState([]);
+  useEffect(()=>{
+    (async()=>{
+      try {
+        const {data} = await axios.post("/api/post/getAll")
+        if (data.success) {
+          setProducts(data.posts)
+        }
+      } catch (error) {
+        console.log("🚀 ~ error:", error)
+      }
+    })()
+  },[])
   return (
     <div className='w-full lg:w-[60%] rounded-[10px] grid grid-cols-1 lg:grid-cols-3	  bg-[#FFFFFF] border border-[#E5E7EB]'>
       {
         products.map((item) => {
+          console.log("🚀 ~ products.map ~ item:", item)
           return (
-            <div className="w-full lg:w-[237px] mb-3  p-2" key={item.id}>
+            <div className="w-full lg:w-[237px] mb-3  p-2" key={item._id}>
             <div className='object-cover	rounded-[8px] w-full h-[172px] relative cursor-pointer' onClick={() => handelModulemode (item.id)}>
-            <Image src={item.productImage} alt="product-image"  className='object-cover	rounded-[8px] w-full h-full'/>
+                <Image src={item.data.images[0] || "/images/repostly-logo.svg"} width={100} height={100} alt="product-image"  className='object-cover	rounded-[8px] w-full h-full'/>
             <div className=' backdrop-blur-lg bg-opacity-50 bg-[rgba(0, 0, 0, 0.22)] absolute bottom-2 left-2 flex gap-1 w-[110px] text-xs		 h-[23px] border-[#F0F0F038] border rounded-[57px] text-[#ffff] items-center justify-center p-1'>
                       <span className='w-[8px] h-[8px] rounded-[50px] bg-[#16A34A]'></span>
                      {

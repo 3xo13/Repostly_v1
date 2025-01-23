@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from '@clerk/nextjs/server';
-import User from "@/db/models/User";
+import User from "@/db/models/user";
 import isValidUsername from "@/utils/userInputSanitization/isValedUsername";
 import { connectToDB } from "@/db/connectToDB";
 

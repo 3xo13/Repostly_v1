@@ -1,5 +1,5 @@
 import { connectToDB } from "@/db/connectToDB";
-import User from "@/db/models/User";
+import User from "@/db/models/user";
 import { NextResponse } from "next/server";
 import { auth } from '@clerk/nextjs/server';
 import isValidUsername from "@/utils/userInputSanitization/isValedUsername";

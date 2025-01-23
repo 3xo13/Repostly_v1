@@ -1,27 +1,32 @@
 import { connectToDB } from "@/db/connectToDB";
 import ExternalAccount from "@/db/models/ExternalAccount";
 import Post from "@/db/models/Post";
-import User from "@/db/models/User";
+import User from "@/db/models/user";
 import getAuthId from "@/utils/helpers/routs/getAuthId";
+import { getUserId } from "@/utils/helpers/routs/getUserId";
 import isValidEmail from "@/utils/userInputSanitization/isValidEmail";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
 	try {
-		const { accountId, post, active } = await req.json();
+		const { post, active } = await req.json();
 
-		if (!accountId || !post) {
+		if (!post) {
 			throw new Error("missing data!!");
 		}
 
-		const authId = await getAuthId();
+		const userId = await getUserId();
 
-		if (!authId) {
-			throw new Error("user not autenticated");
+		if (!userId) {
+			throw new Error("user not found");
 		}
 
 		// make sure the database is connected
 		await connectToDB()
+
+		const user = await User.findById(userId)
+
+		const accountId = user.accounts[0]
 
 		const account = await ExternalAccount.findById(accountId)
 		if (!account) {

@@ -2,16 +2,34 @@
 import TitlePriceDescriptionReference from "@/components/common/forms/TitleAndPrice";
 import ProductDetails from "@/components/common/forms/ProductDetails";
 import ProductImages from "@/components/common/forms/ProductImages";
-// todo: fix react-leaflet error (window is not defined) import PostingLocation
-// from "@/components/common/forms/PostingLocation";
+// todo: fix react-leaflet error (window is not defined) 
+import PostingLocation from "@/components/common/forms/PostingLocation";
 import Link from "next/link";
 import {useCallback, useReducer, useState} from "react";
+import { uploadFileFrontEnd } from "@/db/storage/uploadFileFrontEnd";
+import axios from "axios";
+
+const handleFileUpload = async (files) => {
+    // setLoading(true)
+    try {
+        const urls = []
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const url = await uploadFileFrontEnd(file, "products")
+            urls.push(url)
+        }
+        return urls
+    } catch (error) {
+        console.log("🚀 ~ error:", error)
+    }
+    // setLoading(false)
+}
 
 // This is the initial state of the application
 const initialState = {
     title: "bougeoir",
     category: "Home & Garden",
-    subCategory: "Decoration",
+    subCategory: "Household appliances",
     postType: "offer",
     images: [],
     options: {
@@ -59,7 +77,8 @@ function reducer(state, action) {
 }
 
 const MuiltsepForms = () => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(0);
+    console.log("🚀 ~ MuiltsepForms ~ currentStep:", currentStep)
     const [errors, setErrors] = useState({});
     const [product, dispatch] = useReducer(reducer, initialState)
     console.log("🚀 ~ MuiltsepForms ~ product:", product)
@@ -76,13 +95,39 @@ const MuiltsepForms = () => {
         });
     }, [])
 
+    const handleSubmit = async () => {
+        try {
+            const imagesUrls = await handleFileUpload(product.images)
+            const newProduct = {...product, images: imagesUrls}
+            const {data} = await axios.post("/api/post/put", {post: newProduct, active: false})
+            if (data.success) {
+                alert("post created")
+            }else{
+                throw new Error(data.message);
+            }
+            
+        } catch (error) {
+            console.log("🚀 ~ handleSubmit ~ error:", error)
+            
+        }
+    }
+
     const steps = [
         <TitlePriceDescriptionReference key={0} product={product} dispatch={dispatch} updateOption={updateOption}/>,
         <ProductDetails key={1} product={product} updateOption={updateOption}/>,
         <ProductImages key={2} product={product} dispatch={dispatch}/>,
-        // <PostingLocation key={3}/>
+        <PostingLocation key={3} product={product} updateOption={updateOption} />
     ];
-    // Example steps
+    
+    const handleContinue = (e) => {
+        e.preventDefault()
+        if (currentStep < 3) {
+            setCurrentStep(currentStep + 1)
+        }
+        if (currentStep == 3) {
+            handleSubmit()
+        }
+    }
 
     return (
         <form
@@ -99,7 +144,7 @@ const MuiltsepForms = () => {
                         Cancel
                     </button>
                 </Link>
-                <button className="w-[150px] h-[44px] rounded-md bg-[#131525] text-white">
+                <button className="w-[150px] h-[44px] rounded-md bg-[#131525] text-white" onClick={handleContinue}>
                     Continue
                 </button>
             </div>

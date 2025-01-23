@@ -20,7 +20,7 @@ const TitlePriceDescriptionReference = ({product, dispatch, updateOption}) => {
                         placeholder="Title name..."
                         className=" text-main p-3 w-full lg:w-[80%] outline-0 rounded-md border border-gray-300 shadow-sm focus:ring-blue-500"
                         value={product.title}
-                        onChange={e => dispatch({title: e.target.value})} />
+                        onChange={e => dispatch({type: "title", payload: e.target.value})} />
                 </div>
 
                 {/* Description Field */}

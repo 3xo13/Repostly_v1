@@ -18,7 +18,9 @@ export const post = {
 		newPrice: "",
 		reference: "652",
 		quantity: "1",
-		packageWeight: "Up to 100g"
+		packageWeight: "Up to 100g",
+		newProductType: "Clearance",
+		refurbishedItemType: "Good condition",
 	},
 	images: []
 };

@@ -1,17 +1,26 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
+// todo: fix react-leaflet error (window is not defined)
 // import {MapContainer, TileLayer} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import {CiLocationOn} from "react-icons/ci";
 import "../styles/Input-style.css"
+import MultistepFormNavigation from './formBtns/multistepFormNavigation';
+import PageTitleAndClose from '@/components/ui/AddPostUi/PageTitleAndClose';
 
-const PostingLocation = ({product, updateOption}) => {
+const PostingLocation = ({ product, updateOption, handleForward, handleBackward }) => {
+    const [errMsg, setErrMsg] = useState("");
+    const handleContinue = () => {
+        if (!product.options.address) {
+            setErrMsg("Please add a posting location")
+            return;
+        }
+        handleForward()
+    }
     return (
-        <div className="w-full h-full">
-            <h1
-                className=" mt-2 p-4 text-2xl font-medium text-head border-b border-[#D0D5DD99] w-full">
-                Please add the product's posting location
-            </h1>
+        <div className='full overflow-hidden'>
+            <div className="w-full h-[calc(100%-100px)]">
+            <PageTitleAndClose title={"Please add the product's posting location"} />
             <div className="px-12 w-full h-full mt-4 ">
                 {/* <MapContainer center={[46.6034, 1.8883]}
                     // France's center
@@ -34,7 +43,14 @@ const PostingLocation = ({product, updateOption}) => {
                         placeholder="location"
                         onChange={e => updateOption("address", e.target.value)}/>
                 </div>
+                <div className='w-full p-10 flex center'>
+                    {errMsg && <p className='text-red-500 text-lg'>{errMsg}</p>}
+                </div>
             </div>
+        </div>
+        <MultistepFormNavigation
+                handleContinue={handleContinue}
+                handleBack={handleBackward}/>
         </div>
     )
 }

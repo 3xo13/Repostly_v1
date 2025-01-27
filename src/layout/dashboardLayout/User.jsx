@@ -38,7 +38,7 @@ const Dropdown = () => {
 
                 </button>
 
-                {
+                {/* {
                     isOpen && (
                         <div
                             className="origin-top-right absolute right-0 mt-2 w-44 rounded-t-none rounded-md shadow-lg bg-gray-800 text-gray-200 ring-1 ring-black ring-opacity-5">
@@ -70,7 +70,7 @@ const Dropdown = () => {
                             </ul>
                         </div>
                     )
-                }
+                } */}
             </div>
         </div>
     )

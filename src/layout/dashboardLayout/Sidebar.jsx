@@ -11,6 +11,7 @@ import { LiaShareAltSolid } from "react-icons/lia";
 import "../styles/layout.css"
 import Image from "next/image"
 import Logo from "../../../public/images/side-bar-logo.png"
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -31,16 +32,16 @@ const Sidebar = () => {
       href: "/dashboard/calendar",
       icon: <CiCalendar size={24} />,
     },
-    {
-      name: "profile",
-      href: "/dashboard/profile",
-      icon: <TbSettings2 size={24} />,
-    },
-    {
-      name: "Share",
-      href: "/dashboard/share",
-      icon: <LiaShareAltSolid size={24} />,
-    },
+    // {
+    //   name: "profile",
+    //   href: "/dashboard/profile",
+    //   icon: <TbSettings2 size={24} />,
+    // },
+    // {
+    //   name: "Share",
+    //   href: "/dashboard/share",
+    //   icon: <LiaShareAltSolid size={24} />,
+    // },
 
   ];
 
@@ -67,6 +68,13 @@ const Sidebar = () => {
           
         </Link>
       ))}
+        <button className="text-black " onClick={e => {
+          navigator.clipboard.writeText("https://www.repostly.com").then(() => {
+            toast("Link compied to clipboard")
+          })
+          }}>
+          <LiaShareAltSolid size={30} />
+      </button>
     </div>    
     </div>
 

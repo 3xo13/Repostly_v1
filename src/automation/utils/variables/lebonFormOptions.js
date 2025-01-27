@@ -2646,6 +2646,7 @@ export const lebonFormOptions = {
             },
             state: {
                 type: "list",
+                required: true,
                 options: ["New condition", "Very good condition", "Good condition", "Satisfactory condition", "For parts"]
             },
             durationOfAvailabilityOfSpareParts: {
@@ -2686,6 +2687,7 @@ export const lebonFormOptions = {
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",
@@ -2705,6 +2707,7 @@ export const lebonFormOptions = {
         "Stationery & School Supplies": {
             state: {
                 type: "list",
+                required: true,
                 options: ["New condition", "Very good condition", "Good condition", "Satisfactory condition", "For parts"]
             },
             durationOfAvailabilityOfSpareParts: {
@@ -2745,6 +2748,7 @@ export const lebonFormOptions = {
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",
@@ -2912,6 +2916,7 @@ export const lebonFormOptions = {
             },
             state: {
                 type: "list",
+                required: true,
                 options: [
                     "New condition",
                     "Refurbished",
@@ -2959,6 +2964,7 @@ export const lebonFormOptions = {
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",
@@ -3091,10 +3097,12 @@ export const lebonFormOptions = {
             },
             state: {
                 type: "list",
+                required: true,
                 options: ["New condition", "Very good condition", "Good condition", "Satisfactory condition"]
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",
@@ -3235,10 +3243,12 @@ export const lebonFormOptions = {
             },
             state: {
                 type: "list",
+                required: true,
                 options: ["New condition", "Very good condition", "Good condition", "Satisfactory condition", "For parts"]
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",
@@ -3381,10 +3391,12 @@ export const lebonFormOptions = {
             },
             state: {
                 type: "list",
+                required: true,
                 options: ["New condition", "Very good condition", "Good condition", "Satisfactory condition"]
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",
@@ -3524,6 +3536,7 @@ export const lebonFormOptions = {
             },
             state: {
                 type: "list",
+                required: true,
                 options: [
                     "New condition",
                     "Refurbished",
@@ -3571,6 +3584,7 @@ export const lebonFormOptions = {
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",
@@ -3666,6 +3680,7 @@ export const lebonFormOptions = {
             },
             state: {
                 type: "list",
+                required: true,
                 options: [
                     "New condition",
                     "Refurbished",
@@ -3713,6 +3728,7 @@ export const lebonFormOptions = {
             },
             packageWeight: {
                 type: "list",
+                required: true,
                 options: [
                     "Up to 100g",
                     "From 100g to 250g",

@@ -21,19 +21,19 @@ const Layout = ({children}) => {
             </div>
             <div className='flex-1 col'>
                 <Navbar showSidebar={showSidebar} toggleShowSodebar={toggleShowSodebar}/>
-                <main className='p-6 overflow-hidden'>
+                <main className='px-6 overflow-hidden'>
                     <DashboardProviedr>
                         {children}
                     </DashboardProviedr>
 
                 </main>
             </div>
-            <Link
+            {/* <Link
                 href="/New-post"
                 title="Add New Post"
                 className="text-2xl	 z-20 flex items-center justify-center bg-main fixed bottom-4 right-[20px]	 w-[70px] h-[70px] rounded-[50px]">
                 <FaPlus/>
-            </Link>
+            </Link> */}
         </div>
 
     );

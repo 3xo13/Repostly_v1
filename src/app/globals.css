@@ -298,3 +298,18 @@ border: 1px solid #F1F1F7;
 .screen {
   @apply w-screen h-screen max-w-screen-2xl max-h-screen
 }
+
+.full {
+  @apply w-full h-full
+}
+
+
+
+
+
+
+
+
+.tablePageBtn {
+  @apply px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-gray-600 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400
+}

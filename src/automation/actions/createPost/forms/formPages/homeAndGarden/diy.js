@@ -7,6 +7,8 @@ import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
 import { diyOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/diyOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
+import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
+import { addNewItemType } from "../../formAction/addNewItemType";
 const { "Home & Garden": { DIY } } = lebonFormOptions;
 const {
   adDescription,
@@ -79,6 +81,22 @@ export const diy = async (page, post) => {
 
     // list options
     await selectAllListOptions(page, listOptionsSelectors);
+
+    await addNewItemType(
+      page,
+      post.options.state,
+      post.options.newProductType,
+      selectNewItemType,
+      newItemTypeOption
+    )
+
+    await addRefurbishedItemType(
+      page,
+      post.options.state,
+      post.options.RefurbishedCondition,
+      selectRefurbishedCondition,
+      refurbishedConditionOption
+    )
 
     // description
     await writeToInput(page, post.options.description, adDescription);

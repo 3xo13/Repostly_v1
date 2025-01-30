@@ -1,4 +1,3 @@
-"use client"
 import toast from "react-hot-toast";
 const LoginUser = async (email, password, signIn, router, setActive , Setloading) => {
     if (!email) {

@@ -49,7 +49,7 @@ const MuiltsepForms = () => {
                 active: false
             })
             if (data.success) {
-                router.push("/dashboard")
+                router.push("/dashboard/products")
             } else {
                 throw new Error(data.message);
             }

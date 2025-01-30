@@ -9,7 +9,6 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
 	try {
 		const userId = await getUserId();
-		console.log("🚀 ~ POST ~ userId:", userId)
 
 		if (!userId) {
 			throw new Error("user not autenticated");
@@ -22,7 +21,7 @@ export async function POST(req) {
 
 		const accountId = user.accounts[0];
 
-		const posts = await Post.find({accountId})
+		const posts = await Post.find({account: accountId})
 		
 		return NextResponse.json({success: true, posts} );
 	} catch (error) {

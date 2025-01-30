@@ -97,7 +97,7 @@ export const householdLinen = async (page, post) => {
     await page.waitForSelector(selectors.address);
 
     await skipPrefillMessage(page)
-    
+
     const listOptionsSelectors = selectorsList(post.options);
 
     // list options
@@ -106,7 +106,7 @@ export const householdLinen = async (page, post) => {
     await addNewItemType(
       page,
       post.options.state,
-      post.options.newItemType,
+      post.options.newProductType,
       selectNewItemType,
       newItemTypeOption
     )
@@ -114,7 +114,7 @@ export const householdLinen = async (page, post) => {
     await addRefurbishedItemType(
       page,
       post.options.state,
-      post.options.newItemType,
+      post.options.newProductType,
       selectRefurbishedCondition,
       refurbishedConditionOption
     )

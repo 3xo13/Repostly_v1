@@ -91,7 +91,7 @@ export const gardenAndPlants = async (page, post) => {
     // list options
     await selectAllListOptions(page, listOptionsSelectors);
 
-    await addNewItemType(page, post.options.state, post.options.newItemType, selectNewItemType, newItemTypeOption)
+    await addNewItemType(page, post.options.state, post.options.newProductType, selectNewItemType, newItemTypeOption)
 
 
     // description

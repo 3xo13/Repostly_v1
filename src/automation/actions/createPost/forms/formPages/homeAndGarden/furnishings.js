@@ -7,6 +7,8 @@ import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
 import { furnishingsOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/furnishingsOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
+import { addNewItemType } from "../../formAction/addNewItemType";
+import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
 
 const { "Home & Garden": { Furnishings } } = lebonFormOptions;
 
@@ -31,17 +33,12 @@ const {
   yourGeneralConditionsOfSale,
   yourSellingPrice,
   selectWeight,
-  weightOption
+  weightOption,
+  selectNewItemType,
+  newItemTypeOption
 } = furnishingsOffer;
 
 const selectorsList = (options) => [
-  {
-    input: selectKind,
-    option: () =>
-      kindOption(
-        Furnishings.kind.options.indexOf(options.kind) + 1
-      ),
-  },
   {
     input: selectRoom,
     option: () =>
@@ -51,20 +48,10 @@ const selectorsList = (options) => [
       ),
   },
   {
-    input: selectDurationOfAvailabilityOfSpareParts,
+    input: selectKind,
     option: () =>
-      durationOfAvailabilityOfSparePartsOption(
-        Furnishings.durationOfAvailabilityOfSpareParts.options.indexOf(
-          options.spareParts
-        ) + 1
-      ),
-  },
-  {
-    input: selectState,
-    option: () =>
-      stateOption(
-        Furnishings.state.options.indexOf(options.state) +
-        1
+      kindOption(
+        Furnishings.kind.options.indexOf(options.kind) + 1
       ),
   },
   {
@@ -81,6 +68,23 @@ const selectorsList = (options) => [
       materialOption(
         Furnishings.material.options.indexOf(options.material) +
         1
+      ),
+  },
+  {
+    input: selectState,
+    option: () =>
+      stateOption(
+        Furnishings.state.options.indexOf(options.state) +
+        1
+      ),
+  },
+  {
+    input: selectDurationOfAvailabilityOfSpareParts,
+    option: () =>
+      durationOfAvailabilityOfSparePartsOption(
+        Furnishings.durationOfAvailabilityOfSpareParts.options.indexOf(
+          options.spareParts
+        ) + 1
       ),
   },
   {
@@ -104,6 +108,14 @@ export const furnishings = async (page, post) => {
     // list options
     await selectAllListOptions(page, listOptionsSelectors);
 
+    await addNewItemType(
+      page,
+      post.options.state,
+      post.options.newProductType,
+      selectNewItemType,
+      newItemTypeOption
+    )
+
     // description
     await writeToInput(page, post.options.description, adDescription);
 
@@ -120,7 +132,7 @@ export const furnishings = async (page, post) => {
     await writeToInput(page, post.options.quantity, quantity);
 
     // write selling price
-    await writeToInput(page, post.options.sellingPrice, yourSellingPrice);
+    await writeToInput(page, post.options.price, yourSellingPrice);
 
     // write new price
     await writeToInput(page, post.options.newPrice, newPrice);

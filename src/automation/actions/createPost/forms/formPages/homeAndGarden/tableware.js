@@ -14,7 +14,6 @@ const { "Home & Garden": { "Tableware": tablewareOptions } } = lebonFormOptions;
 
 const {
   adDescription,
-  adTitle,
   colorOption,
   materialOption,
   newPrice,
@@ -83,11 +82,11 @@ const selectorsList = (options) => [
           options.material
         ) + 1
       ),
-    },
-      {
-        input: selectWeight,
-        option: () =>
-          weightOption(
+  },
+  {
+    input: selectWeight,
+    option: () =>
+      weightOption(
         tablewareOptions.packageWeight.options.indexOf(options.packageWeight) +
         1
       ),
@@ -99,7 +98,7 @@ export const tableware = async (page, post) => {
     await page.waitForSelector(selectors.address);
 
     await skipPrefillMessage(page)
-    
+
     const listOptionsSelectors = selectorsList(post.options);
 
     // list options
@@ -111,7 +110,7 @@ export const tableware = async (page, post) => {
     await addNewItemType(
       page,
       post.options.state,
-      post.options.newItemType,
+      post.options.newProductType,
       selectNewItemType,
       newItemTypeOption
     )
@@ -119,7 +118,7 @@ export const tableware = async (page, post) => {
     await addRefurbishedItemType(
       page,
       post.options.state,
-      post.options.newItemType,
+      post.options.RefurbishedCondition,
       selectRefurbishedCondition,
       refurbishedConditionOption
     )
@@ -137,7 +136,7 @@ export const tableware = async (page, post) => {
     await writeToInput(page, post.options.reference, reference);
 
     // write selling price
-    await writeToInput(page, post.options.sellingPrice, yourSellingPrice);
+    await writeToInput(page, post.options.price, yourSellingPrice);
 
     // write new price
     await writeToInput(page, post.options.newPrice, newPrice);

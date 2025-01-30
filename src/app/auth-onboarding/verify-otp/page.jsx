@@ -25,7 +25,7 @@ const page = () => {
             setIsScriptRunning(true)
             try {
                 const {data} = await axios.post(
-                    "/api/auth/externalAccounts/login",
+                    "https://account-otp-server.onrender.com/account_login",
                     {accountId: id}
                 )
                 if (data.success) {

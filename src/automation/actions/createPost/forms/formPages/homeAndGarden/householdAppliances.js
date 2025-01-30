@@ -90,7 +90,7 @@ export const householdAppliances = async (page, post) => {
         await addNewItemType(
             page,
             post.options.state,
-            post.options.newItemType,
+            post.options.newProductType,
             selectNewItemType,
             newItemTypeOption
         )
@@ -98,7 +98,7 @@ export const householdAppliances = async (page, post) => {
       await addRefurbishedItemType(
         page,
         post.options.state,
-        post.options.newItemType,
+        post.options.newProductType,
         selectRefurbishedCondition,
         refurbishedConditionOption
       )

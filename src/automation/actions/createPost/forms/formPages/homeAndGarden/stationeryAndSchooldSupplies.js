@@ -69,7 +69,7 @@ export const stationeryAndSchooldSupplies = async (page, post) => {
 
     // quantity
     await writeToInput(page, post.options.quantity, quantity);
-    
+
     const listOptionsSelectors = selectorsList(post.options);
 
     // list options
@@ -78,7 +78,7 @@ export const stationeryAndSchooldSupplies = async (page, post) => {
     await addNewItemType(
       page,
       post.options.state,
-      post.options.newItemType,
+      post.options.newProductType,
       selectNewItemType,
       newItemTypeOption
     )
@@ -86,7 +86,7 @@ export const stationeryAndSchooldSupplies = async (page, post) => {
     await addRefurbishedItemType(
       page,
       post.options.state,
-      post.options.newItemType,
+      post.options.RefurbishedCondition,
       selectRefurbishedCondition,
       refurbishedConditionOption
     )

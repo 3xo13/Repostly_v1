@@ -13,7 +13,7 @@ export const post = {
 		generalConditionsOfSale: "",
 		description: "Bougeoir à 6 têtes",
 		address: "Route de Lyon, Valencin (38540)",
-		sellingPrice: "35",
+		price: "35",
 		newPrice: "50",
 		reference: "32",
 		quantity: "1",

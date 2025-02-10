@@ -7,6 +7,7 @@ import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
 import { decorationOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/decorationOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
+import { addNewItemType } from "../../formAction/addNewItemType";
 
 const { "Home & Garden": { "Decoration": decorationOptions } } = lebonFormOptions;
 
@@ -25,11 +26,13 @@ const {
   selectState,
   stateOption,
   yourGeneralConditionsOfSale,
-  yourSellingPrice,
+  price,
   selectCategory,
   categoryOption,
   selectWeight,
-  weightOption
+  weightOption,
+  selectNewItemType,
+  newItemTypeOption
 } = decorationOffer;
 
 const selectorsList = (options) => [
@@ -44,34 +47,34 @@ const selectorsList = (options) => [
     input: selectKind,
     option: () =>
       kindOption(
-        decorationOptions.kind.options[options.category].indexOf(options.kind) + 1
+        decorationOptions.kind.options[options?.category]?.indexOf(options.kind) + 1
       ),
-    },
-    {
-      input: selectState,
-      option: () =>
-        stateOption(
-          decorationOptions.state.options.indexOf(options.state) +
-          1
-        ),
-      },
-      {
-        input: selectMaterial,
-        option: () =>
-          materialOption(
-            decorationOptions.material.options.indexOf(
-              options.material
-            ) + 1
-          ),
-        },
-        {
-          input: selectColor,
-          option: () =>
-            colorOption(
-              decorationOptions.color.options.indexOf(options.color) +
-              1
-            ),
-          },
+  },
+  {
+    input: selectState,
+    option: () =>
+      stateOption(
+        decorationOptions.state.options.indexOf(options.state) +
+        1
+      ),
+  },
+  {
+    input: selectMaterial,
+    option: () =>
+      materialOption(
+        decorationOptions.material.options.indexOf(
+          options.material
+        ) + 1
+      ),
+  },
+  {
+    input: selectColor,
+    option: () =>
+      colorOption(
+        decorationOptions.color.options.indexOf(options.color) +
+        1
+      ),
+  },
   {
     input: selectWeight,
     option: () =>
@@ -93,26 +96,34 @@ export const decoration = async (page, post) => {
     // list options
     await selectAllListOptions(page, listOptionsSelectors);
 
+    await addNewItemType(
+      page,
+      post.options.state,
+      post.options.newProductType,
+      selectNewItemType,
+      newItemTypeOption
+    )
+
     // description
     await writeToInput(page, post.options.description, adDescription);
 
     // generalCondetion
     await writeToInput(
-        page,
-        post.options.generalConditionsOfSale,
-        yourGeneralConditionsOfSale
-      );
-  
+      page,
+      post.options.generalConditionsOfSale,
+      yourGeneralConditionsOfSale
+    );
+
 
     // reference
     await writeToInput(page, post.options.reference, reference);
 
-     // quantity
-		await writeToInput(page, post.options.quantity, quantity)
+    // quantity
+    await writeToInput(page, post.options.quantity, quantity)
 
     // write selling price
-    await writeToInput(page, post.options.sellingPrice, yourSellingPrice);
-  
+    await writeToInput(page, post.options.price, price);
+
     // write new price
     await writeToInput(page, post.options.newPrice, newPrice);
 

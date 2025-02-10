@@ -2926,7 +2926,7 @@ export const lebonFormOptions = {
                     "For parts"
                 ]
             },
-            durationOfAvailabilityOfSpareParts: {
+            spareParts: {
                 type: "list",
                 options: [
                     "Not available",
@@ -3546,7 +3546,7 @@ export const lebonFormOptions = {
                     "For parts"
                 ]
             },
-            durationOfAvailabilityOfSpareParts: {
+            spareParts: {
                 type: "list",
                 options: [
                     "Not available",
@@ -3690,7 +3690,7 @@ export const lebonFormOptions = {
                     "For parts"
                 ]
             },
-            durationOfAvailabilityOfSpareParts: {
+            spareParts: {
                 type: "list",
                 options: [
                     "Not available",

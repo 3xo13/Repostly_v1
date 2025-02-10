@@ -87,11 +87,11 @@ const Table = ({product, rows}) => {
                     </td>
                     <td className=" px-2 gap-4 col center h-[125px]">
                         {/* Fixed alignment */}
-                        <button
+                        {/* <button
                             className="bg-[#F3F4F6] flex center w-[27px] h-[27px]  font-bold	text-xl		 rounded-full text-[#6B7280] p-1"
                             onClick={e => handlePost(item._id)}>
                             <CiPlay1 />
-                        </button>
+                        </button> */}
                         <button
                             className="bg-[#EF44441A]  flex center w-[27px] h-[27px]  font-bold	text-xl	rounded-full text-[#EF4444] p-1">
                             <HiMiniNoSymbol />

@@ -46,7 +46,7 @@ const MuiltsepForms = () => {
             }
             const {data} = await axios.post("/api/post/put", {
                 post: newProduct,
-                active: false
+                active: true
             })
             if (data.success) {
                 router.push("/dashboard/products")

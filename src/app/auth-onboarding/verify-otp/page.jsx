@@ -25,6 +25,7 @@ const page = () => {
             setIsScriptRunning(true)
             try {
                 const {data} = await axios.post(
+                    // "http://localhost:4000/account_login",
                     "https://account-otp-server.onrender.com/account_login",
                     {accountId: id}
                 )

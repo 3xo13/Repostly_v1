@@ -4,6 +4,7 @@ import mime from "mime-types";
 import s3Client from "@/db/storage/s3Client";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import extractS3KeysFromUrls from "@/automation/utils/helpers/extractS3keysFromUrls";
+import { scrollIntoView } from "./scrollIntoView";
 
 const Bucket = process.env.S3_BUCKET;
 
@@ -39,6 +40,8 @@ export const uploadImages = async (page, fileUrls) => {
 
         const filesData = await Promise.all(filesDataPromises);
 
+        await scrollIntoView(page, "input[type=file]")
+
         await page.evaluate((filesData) => {
             const input = document.querySelector('input[type=file]');
             const dataTransfer = new DataTransfer();
@@ -53,9 +56,7 @@ export const uploadImages = async (page, fileUrls) => {
             input.dispatchEvent(event);
         }, filesData);
 
-        await waitForMilliseconds(5000);
-
-        await takeScreenshot(page, "newPost", "imagesUploaded");
+        // await takeScreenshot(page, "newPost", "imagesUploaded");
 
         await waitForMilliseconds(5000);
 

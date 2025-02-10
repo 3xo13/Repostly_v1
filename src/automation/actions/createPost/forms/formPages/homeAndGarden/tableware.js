@@ -118,7 +118,7 @@ export const tableware = async (page, post) => {
     await addRefurbishedItemType(
       page,
       post.options.state,
-      post.options.RefurbishedCondition,
+      post.options.refurbishedItemType,
       selectRefurbishedCondition,
       refurbishedConditionOption
     )

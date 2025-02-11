@@ -6,7 +6,9 @@ export const writeToInput = async (page, option, inputSelector) => {
 	}
 	try {
 		await page.type(inputSelector, option);
-		await takeScreenshot(page, "newPost", "singleInputWritten")
+		// await takeScreenshot(page, "newPost", "singleInputWritten")
+		console.log("single Input Written: ", option);
+		
 		return true;
 	} catch (error) {
 		console.log("🚀 ~ singleTextInputPage ~ error:", error)

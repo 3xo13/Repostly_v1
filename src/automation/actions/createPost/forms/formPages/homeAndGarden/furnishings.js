@@ -40,6 +40,22 @@ const {
 
 const selectorsList = (options) => [
   {
+    input: selectState,
+    option: () =>
+      stateOption(
+        Furnishings.state.options.indexOf(options.state) +
+        1
+      ),
+  },
+  {
+    input: selectWeight,
+    option: () =>
+      weightOption(
+        Furnishings.packageWeight.options.indexOf(options.packageWeight) +
+        1
+      ),
+  },
+  {
     input: selectRoom,
     option: () =>
       roomOption(
@@ -70,14 +86,7 @@ const selectorsList = (options) => [
         1
       ),
   },
-  {
-    input: selectState,
-    option: () =>
-      stateOption(
-        Furnishings.state.options.indexOf(options.state) +
-        1
-      ),
-  },
+  
   {
     input: selectDurationOfAvailabilityOfSpareParts,
     option: () =>
@@ -87,14 +96,7 @@ const selectorsList = (options) => [
         ) + 1
       ),
   },
-  {
-    input: selectWeight,
-    option: () =>
-      weightOption(
-        Furnishings.packageWeight.options.indexOf(options.packageWeight) +
-        1
-      ),
-  },
+  
 ];
 
 export const furnishings = async (page, post) => {

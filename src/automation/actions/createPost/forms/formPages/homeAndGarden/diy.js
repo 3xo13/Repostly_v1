@@ -25,9 +25,13 @@ const {
   selectState,
   stateOption,
   yourGeneralConditionsOfSale,
-  yourSellingPrice,
+  price,
   selectWeight,
-  weightOption
+  weightOption,
+  selectNewItemType,
+  newItemTypeOption,
+  selectRefurbishedCondition,
+  refurbishedConditionOption
 } = diyOffer;
 
 const selectorsList = (options) => [
@@ -49,7 +53,7 @@ const selectorsList = (options) => [
     input: selectDurationOfAvailabilityOfSpareParts,
     option: () =>
       durationOfAvailabilityOfSparePartsOption(
-        DIY.durationOfAvailabilityOfSpareParts.options.indexOf(
+        DIY.spareParts.options.indexOf(
           options.spareParts
         ) + 1
       ),
@@ -93,7 +97,7 @@ export const diy = async (page, post) => {
     await addRefurbishedItemType(
       page,
       post.options.state,
-      post.options.RefurbishedCondition,
+      post.options.refurbishedItemType,
       selectRefurbishedCondition,
       refurbishedConditionOption
     )
@@ -114,7 +118,7 @@ export const diy = async (page, post) => {
     await writeToInput(page, post.options.quantity, quantity);
 
     // write selling price
-    await writeToInput(page, post.options.sellingPrice, yourSellingPrice);
+    await writeToInput(page, post.options.price, price);
 
     // write new price
     await writeToInput(page, post.options.newPrice, newPrice);

@@ -12,7 +12,7 @@ const [loadding , setLoading] = useState(false)
         try {
           await signIn.authenticateWithRedirect({
             strategy: "oauth_google",
-            redirectUrl: "/sign-up/sso-callback",
+            redirectUrl: "/auth-onboarding/",
             redirectUrlComplete: "/dashboard",
           });
         } catch (error) {

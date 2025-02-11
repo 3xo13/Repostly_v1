@@ -29,6 +29,6 @@ export const householdLinenOffer = {
     refurbishedConditionOption: (index) => `div.grid:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(4) > div:nth-child(1) > div:nth-child(3) > ul > li:nth-child(${index})`,
 
     quantity: "#quantity",
-    yourSellingPrice: "#price_cents",
+    price: "#price_cents",
     newPrice: "#new_item_price"
 }

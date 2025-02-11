@@ -48,6 +48,16 @@ const postSchema = new mongoose.Schema({
         default: 0,
     },
     failLog: [String],
+    status: {
+        type: String,
+        enum: ["pending", "processing", "posted", "scheduled", "failed"],
+        default: "pending"
+    },
+    postingLog: [String],
+    lastPostingAttempt: {
+        type: Date,
+    },
+
 });
 
 // Check if model exists before defining it

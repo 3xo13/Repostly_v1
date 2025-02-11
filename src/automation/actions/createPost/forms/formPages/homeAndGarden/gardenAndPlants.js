@@ -8,6 +8,7 @@ import { uploadImages } from "../../formAction/uploadImages";
 import { gardenAndPlantsOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/gardenAndPlantsOfferSelectors";
 import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
 import { addNewItemType } from "../../formAction/addNewItemType";
+import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
 const { "Home & Garden": { "Garden & Plants": gardenAndPlantsOptions } } = lebonFormOptions;
 const {
   adDescription,
@@ -24,7 +25,7 @@ const {
   selectState,
   stateOption,
   yourGeneralConditionsOfSale,
-  yourSellingPrice,
+  price,
   selectWeight,
   weightOption,
   selectNewItemType,
@@ -56,7 +57,7 @@ const selectorsList = (options) => [
     input: selectDurationOfAvailabilityOfSpareParts,
     option: () =>
       durationOfAvailabilityOfSparePartsOption(
-        gardenAndPlantsOptions.durationOfAvailabilityOfSpareParts.options.indexOf(
+        gardenAndPlantsOptions.spareParts.options.indexOf(
           options.spareParts
         ) + 1
       ),
@@ -91,8 +92,21 @@ export const gardenAndPlants = async (page, post) => {
     // list options
     await selectAllListOptions(page, listOptionsSelectors);
 
-    await addNewItemType(page, post.options.state, post.options.newProductType, selectNewItemType, newItemTypeOption)
+    await addNewItemType(
+      page,
+      post.options.state,
+      post.options.newProductType,
+      selectNewItemType,
+      newItemTypeOption
+    )
 
+    await addRefurbishedItemType(
+      page,
+      post.options.state,
+      post.options.refurbishedItemType,
+      selectRefurbishedCondition,
+      refurbishedConditionOption
+    )
 
     // description
     await writeToInput(page, post.options.description, adDescription);
@@ -110,7 +124,7 @@ export const gardenAndPlants = async (page, post) => {
     await writeToInput(page, post.options.quantity, quantity);
 
     // write selling price
-    await writeToInput(page, post.options.sellingPrice, yourSellingPrice);
+    await writeToInput(page, post.options.price, price);
 
     // write new price
     await writeToInput(page, post.options.newPrice, newPrice);

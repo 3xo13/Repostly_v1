@@ -30,6 +30,6 @@ export const householdAppliancesOffer = {
     refurbishedConditionOption: (index) => `div.lg\:max-w-\[50\%\]:nth-child(5) > div:nth-child(1) > div:nth-child(3) > ul > li:nth-child(${index})`,
 
     quantity: "#quantity",
-    yourSellingPrice: "#price_cents",
+    price: "#price_cents",
     newPrice: "#new_item_price"
 }

@@ -1,13 +1,13 @@
-import {lebonFormOptions} from "@/automation/utils/variables/lebonFormOptions";
-import {selectors} from "@/automation/utils/variables/selectors";
-import {selectAllListOptions} from "../../formAction/selectAllListOptions";
-import {writeToInput} from "../writeToInput";
-import {pressContinue} from "../../formAction/pressContinue";
-import {takeScreenshot} from "@/automation/utils/dev/takeScreenshot";
+import { lebonFormOptions } from "@/automation/utils/variables/lebonFormOptions";
+import { selectors } from "@/automation/utils/variables/selectors";
+import { selectAllListOptions } from "../../formAction/selectAllListOptions";
+import { writeToInput } from "../writeToInput";
+import { pressContinue } from "../../formAction/pressContinue";
+import { takeScreenshot } from "@/automation/utils/dev/takeScreenshot";
 import { uploadImages } from "../../formAction/uploadImages";
-import {householdAppliancesOffer} from "@/automation/utils/variables/formSelectors/homeAndGarden/householdAppliancesOfferSelectors";
-import {skipPrefillMessage} from "../../formAction/skipPrefillMessage";
-import {addNewItemType} from "../../formAction/addNewItemType";
+import { householdAppliancesOffer } from "@/automation/utils/variables/formSelectors/homeAndGarden/householdAppliancesOfferSelectors";
+import { skipPrefillMessage } from "../../formAction/skipPrefillMessage";
+import { addNewItemType } from "../../formAction/addNewItemType";
 import { addRefurbishedItemType } from "../../formAction/addRefurbishedItemType";
 const { "Home & Garden": { "Household appliances": householdAppliancesOptions } } = lebonFormOptions;
 const {
@@ -27,7 +27,7 @@ const {
     selectState,
     stateOption,
     yourGeneralConditionsOfSale,
-    yourSellingPrice,
+    price,
     selectWeight,
     weightOption,
     selectNewItemType,
@@ -43,13 +43,13 @@ const selectorsList = (options) => [
             householdAppliancesOptions.kind.options.indexOf(options.kind) +
             1
         )
-  }, {
-    input: selectBrand,
-    option: () => brandOption(
-      householdAppliancesOptions.brand.options.indexOf(options.brand) +
-      1
-    )
-  }, {
+    }, {
+        input: selectBrand,
+        option: () => brandOption(
+            householdAppliancesOptions.brand.options.indexOf(options.brand) +
+            1
+        )
+    }, {
         input: selectProduct,
         option: () => productOption(
             householdAppliancesOptions.product.options[options.kind].indexOf(options.product) +
@@ -64,7 +64,7 @@ const selectorsList = (options) => [
     }, {
         input: selectDurationOfAvailabilityOfSpareParts,
         option: () => durationOfAvailabilityOfSparePartsOption(
-            householdAppliancesOptions.durationOfAvailabilityOfSpareParts.options.indexOf(options.spareParts) +
+            householdAppliancesOptions.spareParts.options.indexOf(options.spareParts) +
             1
         )
     }, {
@@ -95,13 +95,13 @@ export const householdAppliances = async (page, post) => {
             newItemTypeOption
         )
 
-      await addRefurbishedItemType(
-        page,
-        post.options.state,
-        post.options.newProductType,
-        selectRefurbishedCondition,
-        refurbishedConditionOption
-      )
+        await addRefurbishedItemType(
+            page,
+            post.options.state,
+            post.options.newProductType,
+            selectRefurbishedCondition,
+            refurbishedConditionOption
+        )
 
         // description
         await writeToInput(page, post.options.description, adDescription);
@@ -119,7 +119,7 @@ export const householdAppliances = async (page, post) => {
         await writeToInput(page, post.options.quantity, quantity);
 
         // write selling price
-        await writeToInput(page, post.options.sellingPrice, yourSellingPrice);
+        await writeToInput(page, post.options.price, price);
 
         // write new price
         await writeToInput(page, post.options.newPrice, newPrice);

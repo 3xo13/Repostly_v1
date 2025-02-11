@@ -16,6 +16,7 @@ export async function POST(req) {
 		const userId = await getUserId()
 		console.log("🚀 ~ POST ~ userId:", userId)
 		if (!email || !password || !userId) {
+			console.log("🚀 ~ missing data in create new account:", email , password , userId)
 			throw new Error("missing data!!");
 		}
 		const isValidMail = isValidEmail(email)

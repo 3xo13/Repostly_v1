@@ -2,23 +2,23 @@ import BrandMessagePanel from "@/components/ui/authui/BrandMessage";
 import Steps from "@/components/common/Steps";
 import { Suspense } from "react";
 import SpinnerWithMessage from "@/components/common/SpinnerWithMessage ";
-export default function RootLayout({children}) {
+export default function RootLayout({ children }) {
     const steps = [
         {
             label: "create-acount",
-            path: "/auth-onboarding/"
+            path: "/register/"
         }, {
             label: "Select Plan",
-            path: "/auth-onboarding/select-plan"
+            path: "/register/select-plan"
         }, {
             label: "Upload Profile",
-            path: "/auth-onboarding/upload-profile"
+            path: "/register/upload-profile"
         }, {
             label: "User Interests",
-            path: "/auth-onboarding/user-interests"
+            path: "/register/user-interests"
         }, {
             label: "Verify OTP",
-            path: "/auth-onboarding/verify-otp"
+            path: "/register/verify-otp"
         }
     ];
 
@@ -29,21 +29,21 @@ export default function RootLayout({children}) {
                     height: "100%"
                 }}
                 className=' w-full  lg:w-[45%] bg-main h-full '>
-                <BrandMessagePanel/>
+                <BrandMessagePanel />
             </div>
             {/* right section here  */}
-        <Suspense fallback={<SpinnerWithMessage title={""} />}>
-            <div
-                className='lg:grow  bg-white  rounded-tl-[22px] rounded-bl-[22px] h-full'
-                style={{
-                    height: '100%',
-                    overflow: 'auto'
-                }}>
-                {children}
-                {/* steps section here  */}
-                <Steps steps={steps}/>
-            </div>
-</Suspense>
+            <Suspense fallback={<SpinnerWithMessage title={""} />}>
+                <div
+                    className='lg:grow  bg-white  rounded-tl-[22px] rounded-bl-[22px] h-full'
+                    style={{
+                        height: '100%',
+                        overflow: 'auto'
+                    }}>
+                    {children}
+                    {/* steps section here  */}
+                    <Steps steps={steps} />
+                </div>
+            </Suspense>
         </div>
     );
 }

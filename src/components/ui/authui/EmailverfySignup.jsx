@@ -1,38 +1,38 @@
 "use client";
 import React from "react";
 import Button from "@/components/common/Button";
-import {useSignUp} from "@clerk/nextjs";
-import {useState} from "react";
+import { useSignUp } from "@clerk/nextjs";
+import { useState } from "react";
 import axios from "axios";
 import SpinnerWithMessage from "@/components/common/SpinnerWithMessage ";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const EmailverfySignup = ({username}) => {
+const EmailverfySignup = ({ username }) => {
     const router = useRouter()
-    const {signUp, isLoaded, setActive} = useSignUp()
+    const { signUp, isLoaded, setActive } = useSignUp()
     const [code, setCode] = useState('')
     const [loading, setLoading] = useState(false)
-    
+
     const handleVerify = async (e) => {
         e.preventDefault();
 
-        if (!isLoaded) 
+        if (!isLoaded)
             return;
         setLoading(true)
         try {
             // Use the code the user provided to attempt verification
-            const signUpAttempt = await signUp.attemptEmailAddressVerification({code});
+            const signUpAttempt = await signUp.attemptEmailAddressVerification({ code });
             console.log("🚀 ~ handleVerify ~ signUpAttempt:", signUpAttempt)
 
             if (signUpAttempt.status === "complete") {
-                await setActive({session: signUpAttempt.createdSessionId});
-                const response = await axios.post("/api/auth/user/register", {username});
+                await setActive({ session: signUpAttempt.createdSessionId });
+                const response = await axios.post("/api/auth/user/register", { username });
                 console.log("🚀 ~ handleVerify ~ response:", response)
                 if (response.data.success) {
                     toast.success("Account created successfully!");
 
-                    router.push("/auth-onboarding/connect-leboncoin");
+                    router.push("/register/connect-leboncoin");
                 } else {
                     throw new Error(response.data.message);
                 }
@@ -75,10 +75,10 @@ const EmailverfySignup = ({username}) => {
                             value={code}
                             onChange={(e) => setCode(e.target.value)}
                             placeholder={"set Verification  code"}
-                            className=" w-[400px] xl:main-w-[200px] lg:w-[300px] text-main outline-0 p-2 mt-1 w-full rounded-md border border-gray-200 shadow-sm sm:text-sm focus:ring-blue-500"/>
+                            className=" w-[400px] xl:main-w-[200px] lg:w-[300px] text-main outline-0 p-2 mt-1 w-full rounded-md border border-gray-200 shadow-sm sm:text-sm focus:ring-blue-500" />
                     </div>
                 </div>
-                <Button type="submit" title="Verify"/> {/* CAPTCHA Widget */}
+                <Button type="submit" title="Verify" /> {/* CAPTCHA Widget */}
                 <div id="clerk-captcha"></div>
             </form>
 

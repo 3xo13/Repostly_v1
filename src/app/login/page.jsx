@@ -58,7 +58,7 @@ const page = () => {
             </form>
 
             <div className="flex items-center justify-between mt-8 gap-10 text-head">
-                <Link href="/auth-onboarding/">Dont have Acount ?</Link>
+                <Link href="/register/">Dont have Acount ?</Link>
                 <Link href="/login-In/forget-password">Forget Password ?</Link>
             </div>
 

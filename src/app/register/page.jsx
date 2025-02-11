@@ -90,7 +90,7 @@ const page = () => {
                 </div>
                 <Button type="submit" title="Confirm" />
                 <div id="clerk-captcha"></div>
-                <Link href="/login-In" className="text-left mt-3 text-desc">
+                <Link href="/login" className="text-left mt-3 text-desc">
                     Have an Account ?
                 </Link>
                 <div className="or-section">

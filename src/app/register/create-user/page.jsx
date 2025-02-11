@@ -9,13 +9,13 @@ const CreateGoogleUser = () => {
 	const [errMsg, setErrMsg] = useState("");
 
 	// create a new user in the database after sign-up with google
-	useEffect(()=>{
-		;(async()=>{
+	useEffect(() => {
+		; (async () => {
 			try {
-				const {data} = await axios.post("/api/auth/user/register", {username: ""})
+				const { data } = await axios.post("/api/auth/user/register", { username: "" })
 				if (data.success) {
-					router.push("/auth-onboarding/connect-leboncoin")
-				}else{
+					router.push("/register/connect-leboncoin")
+				} else {
 					setErrMsg(data.message)
 				}
 			} catch (error) {
@@ -23,12 +23,12 @@ const CreateGoogleUser = () => {
 				setErrMsg(error.message)
 			}
 		})()
-	},[])
+	}, [])
 
 	return (
 		<div className="create-acount-section h-screen">
 			{!errMsg && <SpinnerWithMessage title={"creating your new account..."} />}
-			{errMsg && <p className='text-red-500 text-2xl'>{errMsg}</p> }
+			{errMsg && <p className='text-red-500 text-2xl'>{errMsg}</p>}
 		</div>
 	)
 }

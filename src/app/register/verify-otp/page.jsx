@@ -1,8 +1,8 @@
 "use client"
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Button from '@/components/common/Button'
 import Image from 'next/image'
-import {useRouter, useSearchParams} from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import axios from 'axios'
 import CountDown from '@/components/ui/countDown/CountDown'
 
@@ -24,13 +24,13 @@ const page = () => {
         (async () => {
             setIsScriptRunning(true)
             try {
-                const {data} = await axios.post(
+                const { data } = await axios.post(
                     // "http://localhost:4000/account_login",
                     "https://account-otp-server.onrender.com/account_login",
-                    {accountId: id}
+                    { accountId: id }
                 )
                 if (data.success) {
-                    router.push("/auth-onboarding/select-plan")
+                    router.push("/register/select-plan")
                 } else {
                     setErrMsg("Connection attempt failed, retrying...")
                     router.refresh()
@@ -77,7 +77,7 @@ const page = () => {
     const handelSubmit = async (e) => {
         e.preventDefault();
         try {
-            const {data} = await axios.post("/api/otp/put", {code: otp})
+            const { data } = await axios.post("/api/otp/put", { code: otp })
             if (!data.success) {
                 setErrMsg(data.message)
             }
@@ -102,7 +102,7 @@ const page = () => {
                         src={"/images/repostly-logo.svg"}
                         alt="Leboncion"
                         width={100}
-                        height={100}/>
+                        height={100} />
                 </div>
                 <p></p>
                 <div className="leboncoin">
@@ -110,7 +110,7 @@ const page = () => {
                         src={"/images/lebonc-logo.png"}
                         alt="Leboncion"
                         width={100}
-                        height={100}/>
+                        height={100} />
                 </div>
             </div>
             <form className="input-wrapper" onSubmit={handelSubmit}>
@@ -126,7 +126,7 @@ const page = () => {
                                         focus:border-[#131525]
                                         text-[#131525] focus:ring-2 focus:ring-[#131525]" type="text" ref={(el) => (inputRefs.current[index] = el)} onKeyDown={(e) => handleKeyDown(e, index)}
                                     // maxLength={1}
-                                    name="otp" value={val} onChange={(e) => handleChange(e, index)}/>
+                                    name="otp" value={val} onChange={(e) => handleChange(e, index)} />
                             </div>
                         ))
                     }
@@ -138,12 +138,12 @@ const page = () => {
 
  */
                 }
-                <CountDown seconds={240}/>
+                <CountDown seconds={240} />
 
                 <div style={{
-                        marginTop: "2rem"
-                    }}></div>
-                <Button type="submit" title="Verify"/>
+                    marginTop: "2rem"
+                }}></div>
+                <Button type="submit" title="Verify" />
             </form>
             {errMsg && <p className='text-red-500 text-xl'>{errMsg}</p>}
             <p className="mt-8 text-[#475467]">

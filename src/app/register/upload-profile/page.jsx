@@ -16,7 +16,8 @@ const page = () => {
             const data = Object.fromEntries(formData);
             if(statuts === 200) {
                 redirect("/dashbaord")
-               return setComplatedSteps("")
+               return 
+              //  setComplatedSteps("")
             }
     
         } catch (error) {

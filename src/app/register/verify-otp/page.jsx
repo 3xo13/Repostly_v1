@@ -20,8 +20,9 @@ const page = () => {
     useEffect(() => {
         if (isScriptRunning) {
             return;
-        }
-        (async () => {
+        };
+        setErrMsg("");
+        ;(async () => {
             setIsScriptRunning(true)
             try {
                 const { data } = await axios.post(
@@ -93,7 +94,7 @@ const page = () => {
             <div className="content">
                 <span>Repostly</span>
                 <p>
-                    Please input the one-time-passcode (OTP) sent to your mail address by leboncoin
+                    Please provide the one-time-passcode (OTP) sent to your mail address by leboncoin
                 </p>
             </div>
             <div className="how-connect">

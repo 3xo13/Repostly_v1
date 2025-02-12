@@ -50,6 +50,7 @@ const page = () => {
           router.push("/dashboard")
         } else {
           setErrMsg(data.message)
+          router.refresh()
         }
       } catch (error) {
         console.log("🚀 ~ error:", error)

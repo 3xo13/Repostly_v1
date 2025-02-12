@@ -13,7 +13,7 @@ const Signupgoogel = ({ loading, setLoading }) => {
         setLoading(true)
         try {
             await signUp.authenticateWithRedirect(
-                { strategy: "oauth_google", redirectUrl: "/sign-up/sso-callback", redirectUrlComplete: "/register/create-user" }
+                { strategy: "oauth_google", redirectUrl: "/register", redirectUrlComplete: "/register/create-user" }
             );
         } catch (error) {
             console.error("Error during Google sign-up:", error);

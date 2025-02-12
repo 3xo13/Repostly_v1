@@ -5,11 +5,11 @@ const subscriptionSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true,
-				unique: true
+        unique: true
     },
     startDate: {
         type: Date,
-				default: Date.now(),
+        default: Date.now(),
     },
     endDate: {
         type: Date
@@ -21,7 +21,9 @@ const subscriptionSchema = new mongoose.Schema({
         type: Number
     },
     credit: {
-        type: Number
+        type: Number,
+        required: true,
+        default: 10,
     },
     plan: {
         type: String,
@@ -30,7 +32,10 @@ const subscriptionSchema = new mongoose.Schema({
         ],
         default: "free"
     },
-		
+    active: {
+        type: Boolean,
+        default: true,
+    }
 });
 
 // Check if model exists before defining it

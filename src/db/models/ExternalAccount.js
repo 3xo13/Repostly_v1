@@ -38,7 +38,8 @@ const externalAccountSchema = new mongoose.Schema({
 		type: Boolean,
 		required: true,
 		default: false
-	}
+	},
+
 });
 
 // Check if model exists before defining it

@@ -19,7 +19,8 @@ const page = () => {
             const { data } = await axios.post("/api/auth/externalAccounts/put", formData)
             if (data.success) {
                 router.push(`/register/verify-otp?id=${data.accountId}`)
-                return setComplatedSteps("")
+                return 
+                // setComplatedSteps("")
             }
 
         } catch (error) {

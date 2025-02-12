@@ -1,24 +1,24 @@
 "use client";
 import React from "react";
-import { MdOutlineMail } from "react-icons/md";
-import { RiLockPasswordLine } from "react-icons/ri";
+import {MdOutlineMail} from "react-icons/md";
+import {RiLockPasswordLine} from "react-icons/ri";
 import Input from "@/components/common/Input.jsx";
 import Button from "@/components/common/Button";
 import Link from "next/link";
-import { useAppContext } from "@/context/ContextProviedr";
+import {useAppContext} from "@/context/ContextProviedr";
 import Image from "next/image";
 import Signupgoogel from "@/components/common/Signupgoogel";
-import { FaUser } from "react-icons/fa";
+import {FaUser} from "react-icons/fa";
 import EmailverfySignup from "@/components/ui/authui/EmailverfySignup";
-import { useState } from "react";
-import { useSignUp, useAuth } from "@clerk/nextjs";
+import {useState} from "react";
+import {useSignUp, useAuth} from "@clerk/nextjs";
 import SpinnerWithMessage from "@/components/common/SpinnerWithMessage ";
-import Createuser from "../services/auth/Createuser";
+import CreateUser from "../services/auth/Createuser";
 
 const page = () => {
-    const { setComplatedSteps } = useAppContext();
+    const {setComplatedSteps} = useAppContext();
 
-    const { isLoaded, signUp } = useSignUp(); // Hook for Clerk sign-up
+    const {isLoaded, signUp} = useSignUp(); // Hook for Clerk sign-up
     const [verifying, setVerifying] = useState(false);
     const [loading, setLoading] = useState(false);
     const [username, setusername] = useState("")
@@ -27,9 +27,9 @@ const page = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData);
-        const { email, password, termsAccepted } = data
+        const {email, password, termsAccepted} = data
 
-        await Createuser(
+        await CreateUser(
             setLoading,
             setVerifying,
             signUp,
@@ -42,10 +42,10 @@ const page = () => {
     };
 
     if (loading) {
-        return <div className="create-acount-section "><SpinnerWithMessage title={"Creating Your Acounnt..."} /></div>;
+        return <div className="create-acount-section "><SpinnerWithMessage title={"Creating Your Acounnt..."}/></div>;
     }
     if (verifying) {
-        return <EmailverfySignup username={username} />;
+        return <EmailverfySignup username={username}/>;
     }
     return (
         <div className="create-acount-section ">
@@ -56,39 +56,37 @@ const page = () => {
                     width={100}
                     height={100}
                     alt="logo-Repostly"
-                    className="w-[200px]" />
+                    className="w-[200px]"/>
                 <p className="capitalize">Let's boost your sales, create a repostly account</p>
             </div>
             <form className="input-wrapper" onSubmit={handelSubmit}>
 
                 <div className='cutome-input'>
 
-                    <span><FaUser /></span>
+                    <span><FaUser/></span>
                     <input
                         type="text"
                         name="username"
                         value={username}
                         onChange={(e) => setusername(e.target.value)}
-                        placeholder="set username" />
+                        placeholder="set username"/>
                 </div>
                 {/* custome input style */}
 
-                <Input Placeholder="Email" name="email" type="email" icon={<MdOutlineMail />} />
+                <Input Placeholder="Email" name="email" type="email" icon={<MdOutlineMail />}/>
                 <Input
                     Placeholder="password"
                     name="password"
                     type="password"
-                    icon={<RiLockPasswordLine />
-                    }
-                />
+                    icon={<RiLockPasswordLine />}/>
                 <div className="checkbox-container">
-                    <input type="checkbox" id="termsAccepted" name="termsAccepted" />
+                    <input type="checkbox" id="termsAccepted" name="termsAccepted"/>
                     <label htmlFor="termsAccepted" className="w-full text-read-500">
                         I agree to Repositly Terms of Service, Privacy Policy, and Data Processing
                         Agreement
                     </label>
                 </div>
-                <Button type="submit" title="Confirm" />
+                <Button type="submit" title="Confirm"/>
                 <div id="clerk-captcha"></div>
                 <Link href="/login" className="text-left mt-3 text-desc">
                     Have an Account ?
@@ -99,7 +97,7 @@ const page = () => {
                     <div className="line"></div>
                 </div>
 
-                <Signupgoogel loading={loading} setLoading={setLoading} /> {/* CAPTCHA Widget */}
+                <Signupgoogel loading={loading} setLoading={setLoading}/> {/* CAPTCHA Widget */}
                 <div id="clerk-captcha"></div>
             </form>
         </div>

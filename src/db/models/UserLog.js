@@ -19,9 +19,18 @@ const userLogSchema = new mongoose.Schema({
 		default: 0
 	},
 	todayPosts: {
-		totalPostCount: Number,
-		successfulPostCount: Number,
-		failPostCount: Number,
+		totalPostCount: {
+		type: Number,
+		default: 0
+	},
+		successfulPostCount: {
+		type: Number,
+		default: 0
+	},
+		failPostCount: {
+		type: Number,
+		default: 0
+	},
 	},
 });
 

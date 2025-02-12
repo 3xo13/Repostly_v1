@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import axios from "axios";
+import { createContext, useContext, useEffect, useState } from "react";
 
 // Create Context
 const AppContext = createContext();
@@ -8,12 +9,25 @@ const AppContext = createContext();
 // Provider Component
 const ContextProvider = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(0); // Define state here
-  const [user , setUser] = useState(false)
+  const [userGroupData , setUserGroupData] = useState(null)
   const [complatedSteps , setComplatedSteps] = useState([])
+
+  useEffect(()=>{
+    ;(async()=>{
+      try {
+        const { data } = await axios.get("/api/auth/user/getGroupedData")
+        if (data.success) {
+          setUserGroupData(data.groupData)
+        }
+      } catch (error) {
+        console.log("🚀 ~ ; ~ error:", error)
+      }
+    })()
+  },[])
 
   return (
     <AppContext.Provider value={{ currentStep, setCurrentStep ,
-        complatedSteps , setComplatedSteps
+        complatedSteps , setComplatedSteps, userGroupData, setUserGroupData
     }}>
       {children}
     </AppContext.Provider>

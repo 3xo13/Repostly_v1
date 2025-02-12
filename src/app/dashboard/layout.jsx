@@ -14,7 +14,7 @@ const Layout = ({children}) => {
     return (
         <div className='row screen bg-[#F9FAFB]'>
             <div
-                className={`shadow-md bg-gray-800 overflow-hidden transition-all duration-200 ${showSidebar
+                className={`h-full shadow-md bg-gray-800 overflow-hidden transition-all duration-200 ${showSidebar
                     ? "w-20"
                     : "w-0"}`}>
                 <Sidebar/>

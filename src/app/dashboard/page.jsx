@@ -14,10 +14,11 @@ const MapSection = dynamic(
 const page = () => {
 
     return (
-        <div className='h-full '>
-            <Cards/>
-
-            <div className="flex flex-col gap-3 mt-10 lg:gap-3 lg:flex-row min-h-scree">
+        <div className='full col gap-5 h-full'>
+            <div className='h-2/6 w-full '>
+                <Cards/>
+            </div>
+            <div className="h-4/6 flex flex-col gap-3 lg:flex-row pb-5">
                 <ProductsGrid/>
                 <MapSection/>
             </div>

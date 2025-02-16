@@ -4,9 +4,9 @@ import { FcGoogle } from "react-icons/fc";
 import { useSignIn } from '@clerk/nextjs';
 import toast from 'react-hot-toast';
 import SpinnerWithMessage from './SpinnerWithMessage ';
-const SignIngoogle = () => {
+const SignIngoogle = ({ loading, setLoading }) => {
   const { signIn } = useSignIn()
-  const [loadding, setLoading] = useState(false)
+  // const [loadding, setLoading] = useState(false)
   const handleGoogleSignUp = async () => {
     setLoading(true)
     try {
@@ -23,7 +23,7 @@ const SignIngoogle = () => {
 
     }
   };
-  if (loadding) {
+  if (loading) {
     return <SpinnerWithMessage title={"Sign-In verifiying..."} />
   }
   return (

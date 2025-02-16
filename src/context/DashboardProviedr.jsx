@@ -4,7 +4,9 @@ import {createContext, useContext, useState} from "react";
 const DashboardContext = createContext()
 const DashboardProviedr = ({children}) => {
     const [moduleMode, SetModulemode] = useState(false)
+    const [currentProductId, SetCurrentProductId] = useState("")
     const handelModulemode = (id) => {
+        SetCurrentProductId(id)
         SetModulemode(true)
     }
 
@@ -12,7 +14,8 @@ const DashboardProviedr = ({children}) => {
         value={{
             moduleMode,
             SetModulemode,
-            handelModulemode
+            handelModulemode,
+            currentProductId
         }}>
         {children}
     </DashboardContext.Provider>

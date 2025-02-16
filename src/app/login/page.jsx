@@ -14,7 +14,7 @@ import SpinnerWithMessage from '@/components/common/SpinnerWithMessage ';
 const page = () => {
     const { isLoaded, signIn, setActive } = useSignIn();
     const router = useRouter();
-    const [loading, Setloading] = useState(false)
+    const [loading, setLoading] = useState(false)
     // handel submit data
     const handelSubmit = async (e) => {
         e.preventDefault()
@@ -22,7 +22,7 @@ const page = () => {
         const email = formData.get("email");
         const password = formData.get("password");
         if (isLoaded) {
-            await LoginUser(email, password, signIn, router, setActive, Setloading)
+            await LoginUser(email, password, signIn, router, setActive, setLoading)
         } else {
             return toast.error("Sign-in service is not ready.")
         }
@@ -54,7 +54,7 @@ const page = () => {
                 </div>
                 <div id="clerk-captcha"></div>
                 {/* custome SIGIN - WIHT-GOOGEL-BUTTON */}
-                <SignIngoogle />
+                <SignIngoogle loading={loading} setLoading={setLoading} />
             </form>
 
             <div className="flex items-center justify-between mt-8 gap-10 text-head">

@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link";
 import {FaPlus} from "react-icons/fa";
 import DashboardProviedr from "@/context/DashboardProviedr";
+import Modulepopup from "@/components/common/Modulepopup";
 const Layout = ({children}) => {
     const [showSidebar, setShowSidebar] = useState(true);
     const toggleShowSodebar = () => {
@@ -24,16 +25,11 @@ const Layout = ({children}) => {
                 <main className='px-6 overflow-hidden'>
                     <DashboardProviedr>
                         {children}
+                        <Modulepopup />
                     </DashboardProviedr>
 
                 </main>
             </div>
-            {/* <Link
-                href="/New-post"
-                title="Add New Post"
-                className="text-2xl	 z-20 flex items-center justify-center bg-main fixed bottom-4 right-[20px]	 w-[70px] h-[70px] rounded-[50px]">
-                <FaPlus/>
-            </Link> */}
         </div>
 
     );

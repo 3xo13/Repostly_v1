@@ -3,7 +3,7 @@ import React from 'react'
 import Cards from "@/components/ui/dashboardui/cards/Cards"
 import ProductsSection from '@/components/ui/dashboardui/ProductsSection'
 import ProductsGrid from '@/components/ui/dashboardui/ProductsGrid'
-import Modulepopup from '@/components/common/Modulepopup'
+// import Modulepopup from '@/components/common/Modulepopup'
 import dynamic from 'next/dynamic';
 
 // Dynamically import the MapSection component
@@ -22,7 +22,7 @@ const page = () => {
                 <ProductsGrid/>
                 <MapSection/>
             </div>
-            <Modulepopup/>
+            
         </div>
     )
 }

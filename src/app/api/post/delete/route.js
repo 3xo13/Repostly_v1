@@ -8,10 +8,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
 	try {
-		const { post, active, postId } = await req.json();
+		const { postId } = await req.json();
 
-		console.log("🚀 ~ POST ~ post, active, postId:", post, active, postId)
-		if (!postId || !post) {
+		console.log("🚀 ~ POST ~ post, active, postId:", postId)
+		if (!postId) {
 			throw new Error("missing data!!");
 		}
 
@@ -24,18 +24,11 @@ export async function POST(req) {
 		// make sure the database is connected
 		await connectToDB()
 
-		let postDoc = await Post.findById(postId)
+		let postDoc = await Post.deleteOne({_id: postId})
 
-		if (!postDoc) {
-			throw new Error("post not found");
-		}
+		console.log("🚀 ~ POST ~ postDoc:", postDoc)
 
-		postDoc.active = active;
-		postDoc.data = post;
-
-		await postDoc.save()
-
-		return NextResponse.json({ success: true, post: postDoc });
+		return NextResponse.json({ success: true });
 	} catch (error) {
 		console.log("🚀 ~ POST ~ error:", error)
 		return NextResponse.json({ success: false, message: error.message });

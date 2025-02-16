@@ -8,39 +8,59 @@ import {HiMiniNoSymbol} from "react-icons/hi2";
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid'
 import Link from 'next/link'
+import { useDahboardContext } from '@/context/DashboardProviedr'
+import { FaPause } from 'react-icons/fa'
+import { useAppContext } from '@/context/ContextProviedr'
+import updatePost from '@/utils/helpers/functions/updatePost'
 
-const tableHeaders = ["Product Image", "Title", "Description", "Category", "Subcategory", "Status", "Reposts", "action",]
+const tableHeaders = ["Product Image", "Title", "Description", "Address", "Subcategory", "Status", "Reposts", "action",]
 
 const Table = ({product, rows}) => {
+    const { moduleMode, handelModulemode, currentProductId } = useDahboardContext();
+    const {userGroupData, setUserGroupData} = useAppContext();
     const [products, setProducts] = useState([]);
     const [errMsg, setErrMsg] = useState("")
     const postRef = useRef(null)
 
     useEffect(() => {
-        (async () => {
-            try {
-                const { data } = await axios.post("/api/post/getAll")
-                if (data.success) {
-                    setProducts(data.posts)
-                }
-            } catch (error) {
-                console.log("🚀 ~ error:", error)
-            }
-        })()
-    }, [])
+        if (userGroupData?.posts) {
+            setProducts(userGroupData.posts)
+        }
+    }, [userGroupData])
 
 
-    const handlePost = async (postId) => {
+    const handlePostClick = async (e, id) => {
+        handelModulemode(id)
+    }
+
+    const handlePostDelete = async (e, id) => {
+        e.stopPropagation()
+        console.log("🚀 ~ handlePostDelete ~ id:", id)
         try {
-            const {data} = await axios.post("/api/test", {postId})
+            const {data} = await axios.post('/api/post/delete', {postId: id})
             if (data.success) {
-                
+                const newData = {
+                    ...userGroupData,
+                    posts: userGroupData.posts.filter(el => el._id == id ? null : el)
+                }
+                setUserGroupData(newData)
             }
+            console.log("🚀 ~ handlePostDelete ~ data:", data)
         } catch (error) {
-            console.log("🚀 ~ handlePost ~ error:", error)
-            
+            console.log("🚀 ~ handlePostDelete ~ error:", error)
         }
     }
+
+    const handleStateToggle = async (e, post) => {
+        e.stopPropagation()
+        const {_id, data, active} = post;
+        console.log("🚀 ~ handleStateToggle ~ data:", data)
+        const product = await updatePost(_id, data, active);
+        setUserGroupData({
+            ...userGroupData,
+            posts: userGroupData.posts.map(post => post._id == _id ? { ...post, active: !active } : post)
+        })
+    };
 
     const productTableHeaders = tableHeaders.map(el => <th key={uuidv4()} className="p-4 border-b border-slate-200 bg-slate-200">
         <p className=" font-semibold leading-none text-gray-700">
@@ -51,8 +71,9 @@ const Table = ({product, rows}) => {
     const tableProducts = products.map((item) => {
             return (
                 <tr
-                    className="hover:bg-slate-50 border-b border-slate-200 text-center h-24 max-h-24 overflow-hidden"
-                    key={item._id}>
+                    className="hover:bg-slate-50 border-b border-slate-200 text-center h-24 max-h-24 overflow-hidden cursor-pointer"
+                    key={item._id}
+                    onClick={e => handlePostClick(e, item._id)}>
                     <td className="px-2">
                         <Image
                             className='w-[70px] h-[70px] rounded-[6px] object-contain bg-gray-200'
@@ -67,16 +88,16 @@ const Table = ({product, rows}) => {
                         </div>
                     </td>
                     <td className="px-2">
-                        <p className='text-wrap max-w-40'>{item.data?.options?.description}</p>
+                        <p className='text-wrap max-w-40 line-clamp-3'>{item.data?.options?.description}</p>
                     </td>
                     <td className="px-2">
-                        <p className='text-wrap max-w-40'>{item.data.category}</p>
+                        <p className='text-wrap max-w-40'>{item.data?.options?.address}</p>
                     </td>
                     <td className="px-2">
                         <p className='text-wrap max-w-40'>{item.data.subCategory}</p>
                     </td>
-                    <td className="px-2">
-                        {''}
+                    <td className="px-2 capitalize">
+                        {item.status}
                     </td>
                     <td className="px-2">
                         <div
@@ -87,32 +108,31 @@ const Table = ({product, rows}) => {
                     </td>
                     <td className=" px-2 gap-4 col center h-[125px]">
                         {/* Fixed alignment */}
-                        {/* <button
-                            className="bg-[#F3F4F6] flex center w-[27px] h-[27px]  font-bold	text-xl		 rounded-full text-[#6B7280] p-1"
-                            onClick={e => handlePost(item._id)}>
-                            <CiPlay1 />
-                        </button> */}
                         <button
-                            className="bg-[#EF44441A]  flex center w-[27px] h-[27px]  font-bold	text-xl	rounded-full text-[#EF4444] p-1">
+                            className="bg-[#F3F4F6] flex center w-[27px] h-[27px]  font-bold	text-xl		 rounded-full text-[#6B7280] p-1"
+                            onClick={e => handleStateToggle(e, item)}>
+                                {item.active ? <CiPlay1 /> : <FaPause width={"10px"} height={"10px"}/> }
+                            
+                        </button>
+                        <button
+                            className="bg-[#EF44441A]  flex center w-[27px] h-[27px]  font-bold	text-xl	rounded-full text-[#EF4444] p-1"
+                            onClick={e => handlePostDelete(e, item._id)}>
                             <HiMiniNoSymbol />
-
                         </button>
                     </td>
                 </tr>
             )
         })
     
+    
 
     return (
-        <div className="col gap-3 pb-10 px-10">
-            <Link href="/New-post" className='self-end'>
-                <button className='px-3 py-2 border-2 border-gray-500 rounded-full text-slate-600 hover:bg-slate-200 hover:border-gray-400 font-semibold '>New Product</button>
-            </Link>
+        <div className="col gap-3 pb-10 ">
             <div
-                className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+                className="relative flex flex-col h-full text-gray-700 bg-white shadow-md rounded-lg">
                 <table className="w-full text-left table-auto min-w-max rounded-lg overflow-hidden">
-                    <thead className='text-center'>
-                        <tr >
+                    <thead className='text-center sticky -top-5'>
+                        <tr className=''>
                             {productTableHeaders}
                         </tr>
                     </thead>
